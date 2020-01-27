@@ -3,16 +3,16 @@
 
 /**
  * Db config handler
- * */ 
+ * */
 
 module.exports = {
-    DATABASE    : "",
-    PASSWORD    : "",
-    DBURL       : process.env.DB_CON_STR || "mongodb://127.0.0.1/demo_dev" || "mongodb://<username>:<password>@<host>/demo_dev",
-    HOST        : "127.0.0.1",
+    DATABASE    : "pws",
+    PASSWORD    : "j4caBmVKZSk7GryL",
+    DBURL       : process.env.DB_CON_STR || "mongodb+srv://user:j4caBmVKZSk7GryL@cluster0-gh7ae.gcp.mongodb.net/pws",
+    HOST        : "cluster0-gh7ae.gcp.mongodb.net",
     PORT        : 27017,
     NAME        : "mongodb",
     CONNECTOR   : "mongodb",
-}
+};
 
 

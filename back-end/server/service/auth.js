@@ -6,7 +6,7 @@
 let velidateUser  = {},
     MODEL         = require("../models"),
     COMMON_FUN    = require("../util/commonFunction"),
-    CONSTANTS     = require("../util/constants")
+    CONSTANTS     = require("../util/constants"),
     JWT           = require("jsonwebtoken");
 
 
