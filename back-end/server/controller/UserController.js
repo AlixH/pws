@@ -1,18 +1,34 @@
+const userModel = require('../models/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+module.exports = {
 
+    create: function (req, res, next) {
+        userModel.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        }, function (err, result) {
+            if (err)
+                next(err);
+            else
+                res.json({status: "success", message: "User added successfully!!!", data: null});
 
-'use strict';
+        });
+    },
 
-let UserController = {};
-/**
- * API Request/Route Handler 
- * @param {*} request API Request
- * @param {*} response API Response
- */
-UserController.register = (request, response) => {
-    response.jsonp({status: true, message: "reached"});
-}
-
-
-module.exports = UserController;
-
-
+    authenticate: function (req, res, next) {
+        userModel.findOne({email: req.body.email}, function (err, userInfo) {
+            if (err) {
+                next(err);
+            } else {
+                if (bcrypt.compareSync(req.body.password, userInfo.password)) {
+                    const token = jwt.sign({id: userInfo._id}, "secretKey", {expiresIn: '1h'});
+                    res.json({status: "success", message: "user found!!!", data: {user: userInfo, token: token}});
+                } else {
+                    res.json({status: "error", message: "Invalid email/password!!!", data: null});
+                }
+            }
+        });
+    },
+};

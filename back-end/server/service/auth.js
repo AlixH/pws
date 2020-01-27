@@ -1,27 +1,20 @@
-/**
- * Created by Radhey Shyam on 15/02/18.
- */
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
-"use strict";
-let velidateUser  = {},
-    MODEL         = require("../models"),
-    COMMON_FUN    = require("../util/commonFunction"),
-    CONSTANTS     = require("../util/constants"),
-    JWT           = require("jsonwebtoken");
+const auth = async(req, res, next) => {
+  const token = req.header('Authorization').replace('Bearer ', '');
+  const data = jwt.verify(token, process.env.JWT_KEY);
+  try {
+    const user = await User.findOne({ _id: data._id, 'tokens.token': token });
+    if (!user) {
+      throw new Error()
+    }
+    req.user = user;
+    req.token = token;
+    next()
+  } catch (error) {
+    res.status(401).send({ error: 'Not authorized to access this resource' })
+  }
 
-
-/** User Authentication */
-velidateUser.UserAuth = (request, response, next) => {
-
-  let status = JWT.decode(
-    request.headers.authorization,
-    CONSTANTS.SERVER.JWT_SECRET_KEY
-  );
-
-  status && status.role === CONSTANTS.DATABASE.USER_ROLES.ADMIN
-    ? next()
-    : response.jsonp(CONSTANTS.STATUS_MSG.ERROR.UNAUTHORIZED);
 };
-
-/* export userControllers */
-module.exports = velidateUser;
+module.exports = auth;
