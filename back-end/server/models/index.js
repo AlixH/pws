@@ -5,6 +5,7 @@
  * **/ 
 
 module.exports = {
-  UserModel   :  require('./UserModel'),
+  UserModel   :  require('./User'),
+  PluginModel   :  require('./Plugin'),
   AppVersion  :  require('./AppVersion')
-}
+};
