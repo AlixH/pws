@@ -55,7 +55,7 @@ module.exports = {
     create: function(req, res, next) {
         console.log("createPlugin");
 
-        PluginModel.create({ name: req.body.name, description: req.body.description, version: req.body.version, author: req.body.author, updated_on : req.body.updated_on, video_url : req.body.video_url, thumbnail_url: req.body.thumbnail_url, category : req.body.category, opensource : req.body.opensource, tags : req.body.tags}, function (err, result) {
+        PluginModel.create({ name: req.body.name, description: req.body.description, version: req.body.version, author: req.body.author, updated_on : req.body.updated_on, video_url : req.body.video_url, thumbnail_url: req.body.thumbnail_url, zip_url : req.body.zip_url, category : req.body.category, opensource : req.body.opensource, tags : req.body.tags}, function (err, result) {
             if (err)
                 next(err);
             else
