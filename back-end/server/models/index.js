@@ -6,5 +6,6 @@
 
 module.exports = {
   UserModel   :  require('./User'),
+  PluginModel   :  require('./Plugin'),
   AppVersion  :  require('./AppVersion')
-}
+};

@@ -1,7 +1,7 @@
 
 'use strict';
 let Controller = require('../controller');
-
+let auth = require('../service/auth');
 
 module.exports = (Application) => {
 
