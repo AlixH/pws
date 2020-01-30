@@ -28,10 +28,14 @@ const Schema = mongoose.Schema;const PluginSchema = new Schema({
     },
     video_url: {
         type: String,
+        trim: true
+    },
+    thumbnail_url: {
+        type: String,
         trim: true,
         required: true
     },
-    thumbnail_url: {
+    zip_url: {
         type: String,
         trim: true,
         required: true
