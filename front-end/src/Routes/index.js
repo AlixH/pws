@@ -12,7 +12,7 @@ export default class Routes extends React.Component{
         return (
             <Router>
                 <Switch>
-                    <Route path="/" exact component={Home}></Route>
+                    <Route path="/" exact component={Home}/>
                     <Route path="/*" exact render={()=> <div>No page found</div>}> </Route>
                 </Switch>
             </Router>
