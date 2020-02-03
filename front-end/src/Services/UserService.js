@@ -1,4 +1,5 @@
 
+
 // export further user actions here, like logout, delete account...
 export const userService = {
     login
@@ -27,3 +28,8 @@ function login(username, password) {
         return "OK FOR"
    
 }
+
+// export further user actions here, like logout, delete account...
+export const userService = {
+    login
+};
