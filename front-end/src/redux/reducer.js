@@ -5,9 +5,7 @@ const SET_LOGIN_ERROR = 'SET_LOGIN_ERROR';
 export function login(email, password) {
   return dispatch => {
     dispatch(setLoginPending(true));
-    dispatch(setLoginSuccess(false));
-    dispatch(setLoginError(null));
-
+  
     callLoginApi(email, password, error => {
       dispatch(setLoginPending(false));
       if (!error) {
@@ -52,24 +50,57 @@ function setLoginError(loginError) {
   }
 }
 
+
 /**
  * This method is a callback after calling the login method
  * @param {*} email 
  * @param {*} password 
  * @param {*} callback 
  */
+async function callLoginApi(email, password, callback) {
+    let loginUrl = `http://localhost:4000/users/authenticate`;
+
+    let response = await fetch(loginUrl, {
+      method: 'post',
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"email":email, "password":password})
+    });
+
+    let data = await response.json();
+    console.log(`Received data : ${data.user}, ${data}`);
+
+}
+
+/**
+ * This method is a callback after calling the login method
+ * @param {*} email 
+ * @param {*} password 
+ * @param {*} callback 
+ 
 function callLoginApi(email, password, callback) {
   setTimeout(() => {
     let loginUrl = `http://localhost:4000/users/authenticate`;
-    let requestBody = {"email": email, "password": password};
 
     fetch(loginUrl, {
       method: 'post',
-      headers: {'Content-Type':'application/json'},
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({"email":email, "password":password})
     }).then(
+      (response) => {
+        console.log(`Go response ${response.json()}`);
+        return response.json();
+      }
+    ).then(
       (data) => {
-        console.log(`trying login url with body : `+JSON.stringify({"email":email, "password":password})+`, response data : ${data}`);
+        console.log(`trying login url with body : `+JSON.stringify({"email":email, "password":password})+`, response data : ${JSON.stringify(data.user)}`);
         return data.json();
       })
       .catch(
@@ -78,7 +109,7 @@ function callLoginApi(email, password, callback) {
           return err.json();
         });
   }, 1000);
-}
+}*/
 
 export default function reducer(state = {
   isLoginSuccess: false,
