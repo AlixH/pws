@@ -63,13 +63,13 @@ function callLoginApi(email, password, callback) {
     let loginUrl = `http://localhost:4000/users/authenticate`;
     let requestBody = {"email": email, "password": password};
 
-    //body: JSON.stringify(requestBody)
     fetch(loginUrl, {
       method: 'post',
-      body: JSON.stringify(requestBody)
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({"email":email, "password":password})
     }).then(
       (data) => {
-        console.log(`trying login url with body : ${JSON.stringify(requestBody)}, response data : ${data}`);
+        console.log(`trying login url with body : `+JSON.stringify({"email":email, "password":password})+`, response data : ${data}`);
         return data.json();
       })
       .catch(
@@ -77,16 +77,6 @@ function callLoginApi(email, password, callback) {
           console.log(`trying login url, got error : ${err}`);
           return err.json();
         });
-
-
-
-    /*if (email === 'admin@example2.com' && password === 'admin') {
-        console.log(`Dans call login APi callback : authentification réussie`);
-      return callback(null);
-    } else {
-        console.log(`Dans call login APi callback : authentification échouée`);
-      return callback(new Error('Invalid email and password'));
-    }*/
   }, 1000);
 }
 
