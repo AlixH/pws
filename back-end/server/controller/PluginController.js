@@ -62,4 +62,21 @@ module.exports = {
                 res.json({status: "success", message: "Plugin added successfully!!!", data: null});
         });
     },
+
+    /**
+     * Rate a plugin given its id
+    */
+    rate: (req, res, next) => {
+        console.log("ratePlugin");
+        console.log(req.body.pluginId);
+        console.log(req.body.note);
+
+        PluginModel.findByIdAndUpdate(req.body.pluginId, req.body.note, (err, result) => {
+            if(err){
+                next(err);
+            } else{
+                res.json({status: "success", message: `Plugin of id: ${req.body.pluginId} successfully rated: ${req.body.note}`, data: null});
+            }
+        });
+    },
 };
