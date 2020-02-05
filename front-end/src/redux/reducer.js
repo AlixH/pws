@@ -7,11 +7,14 @@ export function login(email, password) {
     dispatch(setLoginPending(true));
   
     callLoginApi(email, password, error => {
-      dispatch(setLoginPending(false));
-      if (!error) {
-        dispatch(setLoginSuccess(true));
-      } else {
-        dispatch(setLoginError(error));
+      if (error) {
+        dispatch(setLoginPending(false));
+        dispatch(setLoginError(true));
+
+      }
+      else {
+        dispatch(setLoginPending(false));
+        dispatch(setLoginSuccess());
       }
     });
   }
@@ -68,48 +71,22 @@ async function callLoginApi(email, password, callback) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({"email":email, "password":password})
-    });
+    })
 
-    let data = await response.json();
-    console.log(`Received data : ${data.user}, ${data}`);
+    await response.json()
+    .then((data) => {
+      if (data.user == undefined) {
+        console.log("Data.user undefined !");
+        callback(true);
+      }
+      else {
+        console.log(data.user);
+        callback(false);
+      }
+    });
+    
 
 }
-
-/**
- * This method is a callback after calling the login method
- * @param {*} email 
- * @param {*} password 
- * @param {*} callback 
- 
-function callLoginApi(email, password, callback) {
-  setTimeout(() => {
-    let loginUrl = `http://localhost:4000/users/authenticate`;
-
-    fetch(loginUrl, {
-      method: 'post',
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({"email":email, "password":password})
-    }).then(
-      (response) => {
-        console.log(`Go response ${response.json()}`);
-        return response.json();
-      }
-    ).then(
-      (data) => {
-        console.log(`trying login url with body : `+JSON.stringify({"email":email, "password":password})+`, response data : ${JSON.stringify(data.user)}`);
-        return data.json();
-      })
-      .catch(
-        (err) => {
-          console.log(`trying login url, got error : ${err}`);
-          return err.json();
-        });
-  }, 1000);
-}*/
 
 export default function reducer(state = {
   isLoginSuccess: false,
