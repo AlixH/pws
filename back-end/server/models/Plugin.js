@@ -69,10 +69,6 @@ const pluginSchema = mongoose.Schema({
     }]
 });
 
-pluginSchema.rate = function (pluginId, note) {
-    console.log("Rating plugin");
-}
-
 const Plugin = mongoose.model("Plugin", pluginSchema);
 
 module.exports = Plugin;

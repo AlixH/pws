@@ -67,20 +67,28 @@ module.exports = {
      * Rate a plugin given its id
     */
     rate: (req, res, next) => {
-        console.log(">>> rate <<<");
+        console.log(">>> rate plugin <<<");
+
         let pluginId = req.body.pluginId;
-        let note = req.body.note;
-        let plugin = null;
+        let note = parseInt(req.body.note);
+
         /**
          * Plugin.findOne{filter} return one single plugin that matches the filter
-         * Plugin.find{filter} return a a list containing one single plugin that matches the filter
+         * Plugin.find{filter} return a list containing one single plugin that matches the filter
         */
-        Plugin.findOne({_id: "5e32af3e41e3a3001006784c"}, (err, p) => {
+        Plugin.findOne({_id: pluginId}, (err, plugin) => {
             if(err){
                 next(err);
             } else{
-                Plugin.updateOne({_id: p._id}, {ratings: p.ratings.push(note)});
-                res.json({status: "Log", message: "Logging", data: p});
+                let newRatings = plugin.ratings;
+                newRatings.push(note);
+                Plugin.updateOne({_id: plugin._id}, {ratings: newRatings}, (error, p) => {
+                    if(error){
+                        next(error);
+                    } else{
+                        res.json({status: "Log", message: "Logging", data: plugin});
+                    }
+                });
             }
         });
     }
