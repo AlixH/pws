@@ -61,5 +61,5 @@ module.exports = {
             else
                 res.json({status: "success", message: "Plugin added successfully!!!", data: null});
         });
-    },
+    }
 };
