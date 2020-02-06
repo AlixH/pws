@@ -1,9 +1,9 @@
-const PluginModel = require('../models/Plugin');
+const Plugin = require('../models/Plugin');
 
 module.exports = {
     getById: function(req, res, next) {
         console.log("getPluginById");
-        PluginModel.findById(req.params.pluginId, function(err, pluginInfo){
+        Plugin.findById(req.params.pluginId, function(err, pluginInfo){
             if (err) {
                 console.log("error sa mere");
                 console.log(err);
@@ -17,7 +17,7 @@ module.exports = {
     getAll: function(req, res, next) {
         console.log("getAllPlugins");
         let pluginsList = [];
-        PluginModel.find({}, function(err, plugins){
+        Plugin.find({}, function(err, plugins){
             if (err){
                 next(err);
             } else{
@@ -43,7 +43,7 @@ module.exports = {
     deleteById: function(req, res, next) {
         console.log("deletePluginById");
 
-        PluginModel.findByIdAndRemove(req.params.pluginId, function(err, pluginInfo){
+        Plugin.findByIdAndRemove(req.params.pluginId, function(err, pluginInfo){
             if(err)
                 next(err);
             else {
@@ -55,7 +55,7 @@ module.exports = {
     create: function(req, res, next) {
         console.log("createPlugin");
 
-        PluginModel.create({ name: req.body.name, description: req.body.description, version: req.body.version, author: req.body.author, updated_on : req.body.updated_on, video_url : req.body.video_url, thumbnail_url: req.body.thumbnail_url, zip_url : req.body.zip_url, category : req.body.category, opensource : req.body.opensource, tags : req.body.tags}, function (err, result) {
+        Plugin.create({ name: req.body.name, description: req.body.description, version: req.body.version, author: req.body.author, updated_on : req.body.updated_on, video_url : req.body.video_url, thumbnail_url: req.body.thumbnail_url, zip_url : req.body.zip_url, category : req.body.category, opensource : req.body.opensource, tags : req.body.tags}, function (err, result) {
             if (err)
                 next(err);
             else
@@ -67,16 +67,21 @@ module.exports = {
      * Rate a plugin given its id
     */
     rate: (req, res, next) => {
-        console.log("ratePlugin");
-        console.log(req.body.pluginId);
-        console.log(req.body.note);
-
-        PluginModel.findByIdAndUpdate(req.body.pluginId, req.body.note, (err, result) => {
+        console.log(">>> rate <<<");
+        let pluginId = req.body.pluginId;
+        let note = req.body.note;
+        let plugin = null;
+        /**
+         * Plugin.findOne{filter} return one single plugin that matches the filter
+         * Plugin.find{filter} return a a list containing one single plugin that matches the filter
+        */
+        Plugin.findOne({_id: "5e32af3e41e3a3001006784c"}, (err, p) => {
             if(err){
                 next(err);
             } else{
-                res.json({status: "success", message: `Plugin of id: ${req.body.pluginId} successfully rated: ${req.body.note}`, data: null});
+                Plugin.updateOne({_id: p._id}, {ratings: p.ratings.push(note)});
+                res.json({status: "Log", message: "Logging", data: p});
             }
         });
-    },
+    }
 };
