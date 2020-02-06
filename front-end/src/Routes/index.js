@@ -4,6 +4,7 @@ import React from 'react';
 // Import routing components
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LoginForm from '../Components/LoginForm/LoginForm';
+import Home from '../Components/Home';
 import { createBrowserHistory } from "history";
 
 
@@ -14,8 +15,8 @@ export default class Routes extends React.Component{
         return (
             <Router history={history}>
                 <Switch>
+                    <Route path="/target" exact component={Home}/>
                     <Route path="/" exact component={LoginForm}/>
-                    <Route path="/*" exact render={()=> <div>No page found</div>}> </Route>
                 </Switch>
             </Router>
         )

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { login } from '../../redux/reducer';
 import './LoginForm.css';
 
+import { Redirect } from 'react-router-dom'
+
 class LoginForm extends Component {
 
   constructor(props) {
@@ -28,21 +30,35 @@ class LoginForm extends Component {
           </div>
         </div>
 
-        <input type="submit" value="Login" />
+      
+          <input type="submit" value="Login" />
+    
 
         <div className="message">
           { isLoginPending && <div>Please wait...</div> }
           { isLoginSuccess && <div>Success.</div> }
-          { loginError && <div>{loginError.message}</div> }
+          { loginError && <div>Failure</div> }
         </div>
       </form>
     )
+  }
+
+  renderRedirect = () => {
+    //if (this.state.redirect) {
+      console.log("dans renderRedirect");
+      return <Redirect to='/target' />
+    //}
   }
 
   onSubmit(e) {
     e.preventDefault();
     let { email, password } = this.state;
     this.props.login(email, password)
+    console.log("ICI");
+   // this.renderRedirect();
+    console.log("ICI _2 ");
+
+    //this.props.history.push("/Home");
     this.setState({
       email: '',
       password: ''
