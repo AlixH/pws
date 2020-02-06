@@ -3,7 +3,6 @@
  */
 
 const async         = require('async');
-      CONSTANTS     = require('../util/constants');
       fs            = require('fs');
       MONGOOSE      = require('mongoose');
       BCRYPT        = require("bcryptjs");

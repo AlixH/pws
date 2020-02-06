@@ -1,0 +1,250 @@
+swagger: "2.0"
+info:
+  description: "This is the documentation of our Plugins Store."
+  version: "1.0.0"
+  title: "Plugins Store"
+host: "localhost:4000"
+
+tags:
+  - name: "plugins"
+    description: "Operations about plugins"
+  - name: "users"
+    description: "Operations about Users"
+  - name: "files"
+    description: "Operations about Files"
+
+schemes:
+  - "http"
+
+paths:
+  /users/register:
+    post:
+      tags:
+        - "users"
+      summary: "Register new user"
+      description: "Register a user and get a token"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Registration model"
+          required: true
+          schema:      # Request body contents
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
+            example:   # Sample object
+              name: walid
+              email: walid@example.com
+              password: azerty123
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+
+  /users/authenticate:
+    post:
+      tags:
+        - "users"
+      summary: "Login user"
+      description: "Login a new user and get its token"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Login model"
+          required: true
+          schema:      # Request body contents
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+            example:   # Sample object
+              email: walid@example.com
+              password: azerty123
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+
+  /plugins:
+    get:
+      tags:
+        - "plugins"
+      summary: "Get all plugins"
+      description: "get all plugins"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid operation"
+
+
+  /plugins/add:
+    post:
+      tags:
+        - "plugins"
+      summary: "Add new plugin"
+      description: "add new plugin"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "add plugin model"
+          required: true
+          schema:      # Request body contents
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              version:
+                type: string
+              author:
+                type: string
+              video_url:
+                type: string
+              thumbnail_url:
+                type: string
+              zipurl:
+                type: string
+              category:
+                type: string
+              opensource:
+                type: boolean
+              tags:
+                type: array
+                items:
+                  type: string
+            example:
+              name: plugin_name
+              description: plugin_description
+              version: plugin_version
+              author: plugin_author
+              video_url: http://www.host.fr/plugin_video
+              thumbnail_url: http://www.host.fr/plugin_image.png
+              zip_url: http://www.host.fr/plugin_image.zip
+              category: plugin_category
+              opensource: true
+              tags: [rock, pop]
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+
+  /plugins/{pluginId}:
+    get:
+      tags:
+        - "plugins"
+      summary: "Find plugin by ID"
+      description: "Returns a single plugin"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "pluginId"
+          in: "path"
+          description: "ID of plugin to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Plugin not found"
+    delete:
+      tags:
+        - "plugins"
+      summary: "Delete plugin by ID"
+      description: "Delete plugin by ID"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "pluginId"
+          in: "path"
+          description: "ID of plugin to delete"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Plugin not found"
+
+  /files/upload:
+    post:
+      tags:
+        - "files"
+      summary: "Upload file"
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: file1
+          type: file
+          description: The file to upload.
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Plugin not found"
+
+  /files/get:
+    post:
+      tags:
+        - "files"
+      summary: "Get file"
+      description: "Get file"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Get file model"
+          required: true
+          schema:      # Request body contents
+            type: object
+            properties:
+              filename:
+                type: string
+            example:   # Sample object
+              filename: image.png
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid file name supplied"
+        404:
+          description: "File not found"
+
+
+externalDocs:
+  description: "Github repository"
+  url: "https://github.com/AlixH/pws/"

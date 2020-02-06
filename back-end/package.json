@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "gulp-build": "NODE_ENV='production' gulp",
+    "swagger": "js-yaml ./api/swagger/swagger.yaml > swagger.json",
+    "start": "npm run swagger && node server.js",
     "local": "node server.js",
     "localPm2": "pm2 start server.js",
-    "provision": "node ./bin/provision"
+    "provision": "node ./bin/provision",
+    "swagger:edit": "swagger project edit"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +23,6 @@
     "express-validator": "^6.3.1",
     "fibers": "^4.0.3",
     "fs": "0.0.1-security",
-    "gulp-live-server": "0.0.31",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.2.1",
     "mongoose": "^5.8.9",
@@ -38,12 +38,13 @@
     "swagger-express": "^1.0.5",
     "swagger-node-express": "^2.1.3",
     "swig": "^1.4.2",
-    "sync": "^0.2.5"
+    "sync": "^0.2.5",
+    "swagger": "^0.7.5",
+    "swagger-editor": "^3.8.0",
+    "js-yaml": "^3.13.1",
+    "swagger-ui-express": "^4.1.3"
   },
   "devDependencies": {
-    "child_process": "^1.0.2",
-    "gulp": "^4.0.2",
-    "gulp-util": "^3.0.8",
-    "gulplog": "^1.0.0"
+    "child_process": "^1.0.2"
   }
 }

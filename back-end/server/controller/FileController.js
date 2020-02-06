@@ -19,7 +19,6 @@ let upload = null;
 
 storage.on('connection', (db) => {
     //Setting up upload for a single file
-    console.log("storage.on.connection");
     upload = multer({
         storage: storage
     }).single('file1');
@@ -43,7 +42,7 @@ module.exports.uploadFile = (req, res) => {
 module.exports.getFile = (req, res) => {
     //Accepting user input directly is very insecure and should
     //never be allowed in a production app. Sanitize the input.
-    let fileName = req.body.text1;
+    let fileName = req.body.filename;
     //Connect to the MongoDB client
     MongoClient.connect(config.DbConfig.DBURL, async function(err, client){
         if(err){

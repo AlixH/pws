@@ -10,20 +10,17 @@
 const EXPRESS      = require("express");
 const BODY_PARSER  = require("body-parser");
 const ALLFILES     = require("./../filebundle");
-const SWAGGER      = require('./swagger/swagger_lib/swagger-express');
 const PATH         = require("path");
-const BOOTSTRAPING = require("../server/util/BootStraping/BootStraping");
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerDoc = require('../swagger');//v1 api routes
 
 /**creating express server app for server */
 const app         = EXPRESS();
-
 
 /********************************
  ***** Server Configuration *****
  ********************************/
     app.set('port', ALLFILES.CONFIG.ServerConfig.PORT);
-    app.set('swagger_views', __dirname + '../swagger_views');
     app.set('view engine', 'jade');
     app.use(EXPRESS.static("client"));
     app.use(BODY_PARSER.json({limit: '50mb'}));
@@ -50,49 +47,21 @@ const app         = EXPRESS();
         NEXT();
     });
 
-/*******************************
- **** Swagger configuration ****
- *******************************/
-    app.use(SWAGGER.init(app, {
-        apiVersion: '1.0',
-        swaggerVersion: '1.0',
-        basePath: "http://" + ALLFILES.CONFIG.ServerConfig.HOST + ":" +ALLFILES.CONFIG.ServerConfig.PORT,
-        swaggerURL: '/api_documentation',
-        swaggerJSON: '/api-docs.json',
-        swaggerUI: './swagger/swagger_dependencies/swagger',
-        apis: [
-            PATH.join(__dirname, '/swagger/swagger_Routes/user.js'),
-        ]
-    }));
-    app.use(EXPRESS.static(PATH.join(__dirname, 'swagger/swagger_dependencies')));
-
 
 /*******************************
  ****** initializing routes ****
  *******************************/
 require('../server/routes')(app);
 
+/*******************************
+ ********** swagger ************
+ *******************************/
+// app.use('/api/v1/', require('./routes/v1'));
+app.use('/docs/', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+
 
 /** server listening */
 module.exports = () => {
-
-    /*******************************
-     ****** Admin Bootstrapping ****
-     *******************************/
-    BOOTSTRAPING.bootstrapAdmin((ERR, RESULT)=>{
-        if(ERR){
-            ALLFILES.COMMONSERVICE.messageLogs(ERR.message, null);
-            process.exit(0);
-        }else{
-            ALLFILES.COMMONSERVICE.messageLogs(null, "**************Bootstraping done**************");
-        }
-    });
-
-    /*******************************
-     ****** Version Controller* ****
-     *******************************/
-    BOOTSTRAPING.bootstrapAppVersion();
-
 
     /** Server is running here */
     app.listen(ALLFILES.CONFIG.ServerConfig.PORT, (Error)=>{
