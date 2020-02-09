@@ -44,20 +44,17 @@ class LoginForm extends Component {
   }
 
   renderRedirect = () => {
-    //if (this.state.redirect) {
+    if (this.state.redirect) {
       console.log("dans renderRedirect");
       return <Redirect to='/target' />
-    //}
+    }
   }
 
   onSubmit(e) {
     e.preventDefault();
     let { email, password } = this.state;
     this.props.login(email, password)
-    console.log("ICI");
-   // this.renderRedirect();
-    console.log("ICI _2 ");
-
+    //this.props.renderRedirect();
     //this.props.history.push("/Home");
     this.setState({
       email: '',

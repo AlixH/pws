@@ -102,6 +102,7 @@ export default function reducer(state = {
 
     case SET_LOGIN_SUCCESS:
         console.log(`Dans le reducer : ${SET_LOGIN_SUCCESS}`);
+        window.location.href="http://localhost:3000/home";
       return Object.assign({}, state, {
         isLoginSuccess: action.isLoginSuccess
       });

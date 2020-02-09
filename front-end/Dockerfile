@@ -10,7 +10,7 @@ RUN npm i npm@latest -g
 
 RUN npm install -qy
 RUN npm install react-scripts -g
-RUN npm install http-server -g
+RUN npm install serve -g
 
 COPY . .
 
@@ -22,4 +22,4 @@ COPY . .
 EXPOSE 5000
 
 RUN cp -R ./build /usr/build
-CMD ["http-server", "/usr/build", "-p 5000"]
+CMD ["serve", "/usr/build", "-s"]

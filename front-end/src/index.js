@@ -4,9 +4,11 @@ import LoginForm from './Components/LoginForm/LoginForm';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
+import Router from './Routes';
+
 ReactDOM.render(
   <Provider store={store}>
-    <LoginForm />
+    <Router/>
   </Provider>,
   document.getElementById('root')
 );

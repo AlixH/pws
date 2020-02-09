@@ -15,7 +15,7 @@ export default class Routes extends React.Component{
         return (
             <Router history={history}>
                 <Switch>
-                    <Route path="/target" exact component={Home}/>
+                    <Route path="/home" exact component={Home}/>
                     <Route path="/" exact component={LoginForm}/>
                 </Switch>
             </Router>
