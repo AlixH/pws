@@ -77,3 +77,6 @@ node_modules/util-deprecate/
 node_modules/wide-align/
 node_modules/wrappy/
 node_modules/yallist/
+
+*.DS_Store
+front-end/build/*

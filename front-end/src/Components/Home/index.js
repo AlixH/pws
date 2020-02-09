@@ -14,10 +14,11 @@ async function fetchPlugins() {
 function Home(properties){
   const plugins = useStore()
   return (
-    plugins.map(plugin => (
-        <Plugin plugin={plugin}/>
-    )
-  )
+    //plugins.map(plugin => (
+      //  <Plugin plugin={plugin}/>
+    //)
+    <p>Hello from Home !</p>
+  //)
   )
 }
 

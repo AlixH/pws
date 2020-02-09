@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginForm from './Components/LoginForm/LoginForm';
 import { Provider } from 'react-redux';
 import store from "./store";
+import Router from './Routes';
 
 ReactDOM.render(
   <Provider store={store}>
-    <LoginForm />
+    <Router/>
   </Provider>,
   document.getElementById('root')
 );
