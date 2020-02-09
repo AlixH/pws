@@ -35,8 +35,8 @@ class LoginForm extends Component {
 
         <div className="message">
           { isLoginPending && <div>Please wait...</div> }
-          { isLoginSuccess && <div>Success.</div> }
-          { loginError && <div>{loginError.message}</div> }
+          { isLoginSuccess && <div>Authentication Succeed.</div> }
+          { loginError && <div>Authentication failed.</div> }
         </div>
       </form>
     )
@@ -98,7 +98,6 @@ const login = (email, password) => {
       if (error) {
         dispatch(setLoginPending(false));
         dispatch(setLoginError(true));
-
       } else {
         dispatch(setLoginPending(false));
         dispatch(setLoginSuccess());
