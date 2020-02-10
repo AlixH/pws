@@ -1,0 +1,1 @@
+export const SET_LOGIN_PENDING = 'SET_LOGIN_PENDING';

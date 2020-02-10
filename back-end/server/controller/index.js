@@ -6,5 +6,5 @@
 module.exports = {
     UserController    : require("./UserController"),
     PluginController    : require("./PluginController"),
-    UploadController    : require("./UploadController"),
+    FileController    : require("./FileController"),
 };
