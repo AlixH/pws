@@ -1,9 +1,9 @@
-const PluginModel = require('../models/Plugin');
+const Plugin = require('../models/Plugin');
 
 module.exports = {
     getById: function(req, res, next) {
         console.log("getPluginById");
-        PluginModel.findById(req.params.pluginId, function(err, pluginInfo){
+        Plugin.findById(req.params.pluginId, function(err, pluginInfo){
             if (err) {
                 console.log("error sa mere");
                 console.log(err);
@@ -17,12 +17,11 @@ module.exports = {
     getAll: function(req, res, next) {
         console.log("getAllPlugins");
         let pluginsList = [];
-        PluginModel.find({}, function(err, plugins){
+        Plugin.find({}, function(err, plugins){
             if (err){
                 next(err);
             } else{
                 for (let plugin of plugins) {
-                    // pluginsList.push({id: plugin._id, name: plugin.name, description: plugin.description, version: plugin.version, author: plugin.author, updated_on : plugin.updated_on, video_url : plugin.video_url, thumbnail_url: plugin.thumbnail_url, category : plugin.category, opensource : plugin.opensource, tags : plugin.tags, comments: plugin.comments, number_of_ratings: plugin.number_of_ratings, score : plugin.score});
                     pluginsList.push(plugin);
                 }
                 res.json({status:"success", message: "Plugin list found!!!", data:{plugins: pluginsList}});
@@ -43,7 +42,7 @@ module.exports = {
     deleteById: function(req, res, next) {
         console.log("deletePluginById");
 
-        PluginModel.findByIdAndRemove(req.params.pluginId, function(err, pluginInfo){
+        Plugin.findByIdAndRemove(req.params.pluginId, function(err, pluginInfo){
             if(err)
                 next(err);
             else {
@@ -55,11 +54,71 @@ module.exports = {
     create: function(req, res, next) {
         console.log("createPlugin");
 
-        PluginModel.create({ name: req.body.name, description: req.body.description, version: req.body.version, author: req.body.author, updated_on : req.body.updated_on, video_url : req.body.video_url, thumbnail_url: req.body.thumbnail_url, zip_url : req.body.zip_url, category : req.body.category, opensource : req.body.opensource, tags : req.body.tags}, function (err, result) {
+        Plugin.create({ name: req.body.name, description: req.body.description, version: req.body.version, 
+                        author: req.body.author, updated_on : req.body.updated_on, video_url : req.body.video_url, 
+                        thumbnail_url: req.body.thumbnail_url, zip_url : req.body.zip_url, category : req.body.category, 
+                        opensource : req.body.opensource, tags : req.body.tags}, function (err, result) {
             if (err)
                 next(err);
             else
                 res.json({status: "success", message: "Plugin added successfully!!!", data: null});
         });
-    }
+    },
+
+    /**
+     * Add rating to one plugin's rating list
+    */
+    rate: (req, res, next) => {
+        console.log(">>> rate plugin <<<");
+
+        let pluginId = req.body.pluginId;
+        let note = parseInt(req.body.note);
+
+        /**
+         * Reminder:
+         ** Plugin.findOne{filter} returns one single plugin that matches the filter
+         ** Plugin.find{filter} returns a list containing one single plugin that matches the filter
+        */
+        Plugin.findOne({_id: pluginId}, (err, plugin) => {
+            if(err){
+                next(err);
+            } else{
+                let newRatings = plugin.ratings;
+                newRatings.push(note);
+                Plugin.updateOne({_id: plugin._id}, {ratings: newRatings}, (error, p) => {
+                    if(error){
+                        next(error);
+                    } else{
+                        res.json({status: "Success", message: `Plugin ${plugin.name} has been rated ${note}`, data: null});
+                    }
+                });
+            }
+        });
+    },
+
+    /**
+     * Get plugin's score
+    */
+    getScore: (req, res, next) => {
+        console.log(">>> getScore <<<");
+
+        let pluginId = req.body.pluginId;
+
+        Plugin.findOne({_id: pluginId}, (err, plugin) => {
+            if(err){
+                next(err);
+            } else{
+                let ratings = plugin.ratings;
+                let score = 0;
+
+                if(ratings.length > 0){
+                    /**
+                     * Sum all the ratings into score
+                    */
+                    score = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+                }
+                res.json({status: "Success", data: {score: score}});
+            }
+        });
+    },
 };

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 //Define a schema
-const Schema = mongoose.Schema;const PluginSchema = new Schema({
+// const Schema = mongoose.Schema;
+const pluginSchema = mongoose.Schema({
     name: {
         type: String,
         trim: true,
@@ -65,7 +66,9 @@ const Schema = mongoose.Schema;const PluginSchema = new Schema({
         type: Number,
         trim: true,
         default: []
-    }]
+    }],
 });
 
-module.exports = mongoose.model('Plugin', PluginSchema);
+const Plugin = mongoose.model("Plugin", pluginSchema);
+
+module.exports = Plugin;
