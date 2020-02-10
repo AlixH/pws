@@ -1,25 +1,18 @@
 import React from 'react';
 import './style.css';
-import Plugin from "../Plugin/Plugin";
-import {useStore} from "react-redux";
 
-const url = "localhost/plugins";
-
-async function fetchPlugins() {
-  const response = await fetch(url);
-  const plugins = await response.json();
-  return plugins;
-}
 
 function Home(properties){
-  const plugins = useStore()
+
+  console.log(localStorage.getItem('id'));
+  console.log(localStorage.getItem('token'))
+  let id = localStorage.getItem('id')
+  let token = localStorage.getItem('token')
+
   return (
-    //plugins.map(plugin => (
-      //  <Plugin plugin={plugin}/>
-    //)
-    <p>Hello from Home !</p>
-  //)
+    <p>hello {id} : {token} </p>
   )
+
 }
 
 export default Home

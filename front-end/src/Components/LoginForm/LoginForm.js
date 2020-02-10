@@ -133,7 +133,9 @@ async function callLoginApi(email, password, callback) {
           callback(true);
         }
         else {
-          console.log(data.user);
+          localStorage.setItem('id', data.user._id)
+          localStorage.setItem('token', data.user.tokens[0].token)
+          //console.log(data.user.tokens[0].token)
           callback(false);
         }
       });
