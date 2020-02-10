@@ -66,7 +66,7 @@ const pluginSchema = mongoose.Schema({
         type: Number,
         trim: true,
         default: []
-    }]
+    }],
 });
 
 const Plugin = mongoose.model("Plugin", pluginSchema);

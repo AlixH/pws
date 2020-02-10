@@ -8,8 +8,6 @@ module.exports = (Application) => {
     Application.route('/plugins').post(Controller.PluginController.create);
     Application.route('/plugins/:pluginId').get(Controller.PluginController.getById);
     Application.route('/plugins/:pluginId').delete(Controller.PluginController.deleteById);
-    /**
-     * modify existing resource
-    */
     Application.route('/plugins/rate').post(Controller.PluginController.rate);
+    Application.route('/plugins/get-score').post(Controller.PluginController.getScore);
 };

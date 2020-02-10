@@ -22,7 +22,6 @@ module.exports = {
                 next(err);
             } else{
                 for (let plugin of plugins) {
-                    // pluginsList.push({id: plugin._id, name: plugin.name, description: plugin.description, version: plugin.version, author: plugin.author, updated_on : plugin.updated_on, video_url : plugin.video_url, thumbnail_url: plugin.thumbnail_url, category : plugin.category, opensource : plugin.opensource, tags : plugin.tags, comments: plugin.comments, number_of_ratings: plugin.number_of_ratings, score : plugin.score});
                     pluginsList.push(plugin);
                 }
                 res.json({status:"success", message: "Plugin list found!!!", data:{plugins: pluginsList}});
@@ -55,7 +54,10 @@ module.exports = {
     create: function(req, res, next) {
         console.log("createPlugin");
 
-        Plugin.create({ name: req.body.name, description: req.body.description, version: req.body.version, author: req.body.author, updated_on : req.body.updated_on, video_url : req.body.video_url, thumbnail_url: req.body.thumbnail_url, zip_url : req.body.zip_url, category : req.body.category, opensource : req.body.opensource, tags : req.body.tags}, function (err, result) {
+        Plugin.create({ name: req.body.name, description: req.body.description, version: req.body.version, 
+                        author: req.body.author, updated_on : req.body.updated_on, video_url : req.body.video_url, 
+                        thumbnail_url: req.body.thumbnail_url, zip_url : req.body.zip_url, category : req.body.category, 
+                        opensource : req.body.opensource, tags : req.body.tags}, function (err, result) {
             if (err)
                 next(err);
             else
@@ -64,7 +66,7 @@ module.exports = {
     },
 
     /**
-     * Rate a plugin given its id
+     * Add rating to one plugin's rating list
     */
     rate: (req, res, next) => {
         console.log(">>> rate plugin <<<");
@@ -73,8 +75,9 @@ module.exports = {
         let note = parseInt(req.body.note);
 
         /**
-         * Plugin.findOne{filter} return one single plugin that matches the filter
-         * Plugin.find{filter} return a list containing one single plugin that matches the filter
+         * Reminder:
+         ** Plugin.findOne{filter} returns one single plugin that matches the filter
+         ** Plugin.find{filter} returns a list containing one single plugin that matches the filter
         */
         Plugin.findOne({_id: pluginId}, (err, plugin) => {
             if(err){
@@ -86,10 +89,36 @@ module.exports = {
                     if(error){
                         next(error);
                     } else{
-                        res.json({status: "Log", message: "Logging", data: plugin});
+                        res.json({status: "Success", message: `Plugin ${plugin.name} has been rated ${note}`, data: null});
                     }
                 });
             }
         });
-    }
+    },
+
+    /**
+     * Get plugin's score
+    */
+    getScore: (req, res, next) => {
+        console.log(">>> getScore <<<");
+
+        let pluginId = req.body.pluginId;
+
+        Plugin.findOne({_id: pluginId}, (err, plugin) => {
+            if(err){
+                next(err);
+            } else{
+                let ratings = plugin.ratings;
+                let score = 0;
+
+                if(ratings.length > 0){
+                    /**
+                     * Sum all the ratings into score
+                    */
+                    score = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+                }
+                res.json({status: "Success", data: {score: score}});
+            }
+        });
+    },
 };
