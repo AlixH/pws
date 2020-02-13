@@ -4,6 +4,11 @@ const GridFsStorage = require('multer-gridfs-storage');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const ObjectID = require('mongodb').ObjectID;
+const path     = require("path");
+const Unzipper = require("decompress-zip");
+const fs = require("fs");
+
+const extract = require('extract-zip');
 
 let storage = new GridFsStorage({
     url:  config.DbConfig.DBURL,
@@ -24,12 +29,21 @@ const localStorage = multer.diskStorage({
     }
 });
 
-let upload = null;
-let localUpload = null;
 
+let upload = null;
 let localDestination = multer({storage: localStorage});
 
-function fileUpload(req, res, next) {
+
+const unzipFile = (source, destination, next) => {
+    console.log(`gonna unzip ${source} in ${destination}`);
+    extract(source, {dir: destination},function (err) {
+       console.log(`__error : ${err}`);
+   });
+
+    next();
+}
+
+async function fileUpload(req, res, next) {
     localDestination.single('file1')(req, res, next)
     next();
 }
@@ -40,33 +54,30 @@ storage.on('connection', (db) => {
     upload = multer({
         storage: storage
     }).single('file1');
-
-    //localUpload = multer({storage: localStorage}).single('file1');
-
 });
 
-/*const upload = multer({storage});
-app.get('/', (req, res) => res.sendFile(path.join(__dirname+'/index.html')));
-app.post('/fileUpload', upload.single('file'), (req, res) => {
-    res.send('file uploaded');
-});*/
 
-
-module.exports.uploadFile = (req, res) => {
+module.exports.uploadFile = async (req, res) => {
     console.log("uploadFile");
     upload(req, res, (err) => {
         if(err){
             console.log(err);
             return res.status(500).send({title: 'Uploaded Error', message: 'File could not be uploaded', error: err});
         }
-        console.log("req " + req);
-        console.log("req " + req.file);
-        console.log("req " + req.file.filename);
+        console.log("____");
+        console.log(req.file.filename);
+        console.log("____");
         res.status(200).send({title: 'Uploaded', message: `File ${req.file.filename} has been uploaded!`});
     });
 
-    fileUpload(req, res, () => {
+    let fileUploaded = await fileUpload(req, res, () => {
         console.log("dnas le next()");
+    });
+
+    //let source = await `./uploads/${req.file.fileName}`;
+    let source = `./uploads/helloWorld-ZIPPE.png.zip`;
+    let fileUnziped =  unzipFile(source, '/Users/soufiane/Desktop/polytech/pws/back-end/uploads/zz', () => {
+        console.log("file unziped !");
     });
 };
 
