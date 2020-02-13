@@ -8,7 +8,7 @@ function Plugin(properties){
     let plugin = new PluginModel(...properties.plugin);
     return (
         <div>
-            <img src={plugin.imageUrl}/>
+            <img src={plugin.image_url}/>
             <div id={"plugin_preview"}>
                 <h1>{plugin.name}</h1>
                 <h2>{plugin.category}</h2>
