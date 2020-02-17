@@ -7,6 +7,7 @@ const loginPendingReducer = (state = defaultState, action) => {
         return {loginError : action.isLoginPending};
     } else {
         return state;
+
     }
 };
 export default loginPendingReducer;
