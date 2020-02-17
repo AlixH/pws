@@ -5,8 +5,9 @@ import {SET_PLUGINUPLOAD_SUCCESS} from "../../store/actions/PluginUploadActions/
 import {SET_PLUGINUPLOAD_PENDING} from "../../store/actions/PluginUploadActions/PluginUploadPending";
 import {SET_PLUGINUPLOAD_ERROR} from "../../store/actions/PluginUploadActions/PluginUploadError";
 
-class PluginUploadForm extends Component{
+// import {FormControl, TextField, Input, Button} from "@material-ui/core";
 
+class PluginUploadForm extends Component{
 
     constructor(props) {
       super(props);
@@ -16,7 +17,6 @@ class PluginUploadForm extends Component{
 
     render(){
         let {
-            pluginId,
             name,
             description,
             video_url,
@@ -33,35 +33,28 @@ class PluginUploadForm extends Component{
             pluginUploadError
         } = this.props;
         return (
-            // <form name="pluginUploadForm">
-            //     <div class="form-group-collection">
-            //         <input name="pluginId" placeholder="PluginIde"></input>
-            //         <input name="plugnameinId" placeholder="Name"></input>
-            //         <textarea name="Description" placeholder="Description"></textarea>
-            //         <textarea name="video_url" placeholder="Video URL"></textarea>
-            //         <textarea name="image_url" placeholder="Image URL"></textarea>
-            //         <input name="version" placeholder="Version"></input>
-            //         <option name="open_source">Opoen Source?</option>
-            //         <input name="category" placeholder="Category"></input>
-            //         <input name="tags" placeholder="Tags"></input>
-            //         <input name="authorId" placeholder="Author Id"></input>
-            //     </div>
-            // </form>
-            <div class="col-md-6">
-              <form name="pluginUploadForm" method="post" action="#" id="#">
-              <div class="form-group files">
-                  <label>Upload Your File </label>
-                  <input type="file" class="form-control" multiple=""/>
+            <form name="pluginUploadForm">
+                <pre>Upload Plugin</pre>
+                <input name="name" placeholder="Name"></input>
+                <textarea name="description" placeholder="Description"></textarea>
+                <textarea name="video_url" placeholder="Video URL"></textarea>
+                <textarea name="image_url" placeholder="Image URL"></textarea>
+                <input name="version" placeholder="Version"></input>
+                <div class="checkbox-input-wrapper">
+                  Open Source?
+                  <input type="checkbox" name="open_source"></input>
                 </div>
-              </form>
-            </div>
+                <input name="category" placeholder="Category"></input>
+                <input name="tags" placeholder="Tags"></input>
+                <input name="authorId" placeholder="Author Id"></input>
+                <input type="submit" name="submit" value="Upload"></input>
+            </form>
         );
     }
 
     onSubmit(e) {
         e.preventDefault();
         let {
-            pluginId,
             name,
             description,
             video_url,
@@ -72,9 +65,8 @@ class PluginUploadForm extends Component{
             tags,
             authorId
         } = this.state;
-        this.props.upload(pluginId, name, description, video_url, image_url, version, open_source, category, tags, authorId);
+        this.props.upload(name, description, video_url, image_url, version, open_source, category, tags, authorId);
         this.setState({
-            pluginId: "",
             name: "",
             description: "",
             video_url: "",
@@ -88,11 +80,11 @@ class PluginUploadForm extends Component{
     }
 }
 
-const upload = (pluginId, name, description, video_url, image_url, version, open_source, category, tags, authorId) => {
+const upload = (name, description, video_url, image_url, version, open_source, category, tags, authorId) => {
     return dispatch => {
       dispatch(setPluginUploadPending(true));
   
-      callPluginUploadApi(pluginId, name, description, video_url, image_url, version, open_source, category, tags, authorId, (error) => {
+      callPluginUploadApi(name, description, video_url, image_url, version, open_source, category, tags, authorId, (error) => {
         if (error) {
           dispatch(setPluginUploadPending(false));
           dispatch(setPluginUploadError(true));
@@ -148,13 +140,12 @@ const upload = (pluginId, name, description, video_url, image_url, version, open
  * @param {*} authorId
  * @param {*} video_url
  * @param {*} image_url
- * @param {*} pluginId
  * @param {*} category
  * @param {*} open_source
  * @param {*} tags
  * @param {*} callback
  */
-const callPluginUploadApi = async (pluginId, name, description, video_url, image_url, version, open_source, category, tags, authorId, callback) => {
+const callPluginUploadApi = async (name, description, video_url, image_url, version, open_source, category, tags, authorId, callback) => {
     let Url = `http://localhost:4000/plugins/add`;
     let response = await fetch(Url, {
         method: 'post',
@@ -164,7 +155,6 @@ const callPluginUploadApi = async (pluginId, name, description, video_url, image
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "pluginId": pluginId,
             "name": name,
             "description": description,
             "video_url": video_url,
@@ -197,8 +187,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        upload: (pluginId, name, description, video_url, image_url, version, open_source, category, tags, authorId) => 
-        upload(pluginId, name, description, video_url, image_url, version, open_source, category, tags, authorId)(dispatch)
+        upload: (name, description, video_url, image_url, version, open_source, category, tags, authorId) => 
+        upload(name, description, video_url, image_url, version, open_source, category, tags, authorId)(dispatch)
     };
 };
 

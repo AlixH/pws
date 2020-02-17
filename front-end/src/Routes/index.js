@@ -17,6 +17,7 @@ export default class Routes extends React.Component{
             <Router history={history}>
                 <Switch>
                     <Route path="/home" exact component={Home}/>
+                    <Route path="/" exact component={Home}/>
                     <Route path="/login" exact component={LoginForm}/>
                     <Route path="/plugin-upload" exact component={PluginUploadForm}/>
                     <Route path="/*" exact render={()=> <div>No page found</div>}> </Route>
