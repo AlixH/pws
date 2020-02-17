@@ -5,6 +5,20 @@ import {SET_LOGIN_PENDING} from "../../store/actions/LoginPending";
 import {SET_LOGIN_SUCCESS} from "../../store/actions/LoginSuccess";
 import {SET_LOGIN_ERROR} from "../../store/actions/LoginError";
 
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
 class LoginForm extends Component {
 
 
@@ -15,23 +29,59 @@ class LoginForm extends Component {
   }
 
   render() {
+
     let {email, password} = this.state;
     let {isLoginPending, isLoginSuccess, loginError} = this.props;
     return (
+      <div className="rootDiv">
+        <Card raised={"true"} className={"card"} >
+            <CardContent >
       <form name="loginForm" onSubmit={this.onSubmit}>
         <div className="form-group-collection">
           <div className="form-group">
-            <label>Email:</label>
-            <input type="email" name="email" onChange={e => this.setState({email: e.target.value})} value={email}/>
+              <TextField
+              required
+              id="outlined-required"
+              label="Adresse email"
+            type="email"
+            defaultValue=""
+            variant="outlined"
+            onChange={e => this.setState({email: e.target.value})}
+            value={email}
+          />
           </div>
 
           <div className="form-group">
-            <label>Password:</label>
-            <input type="password" name="password" onChange={e => this.setState({password: e.target.value})} value={password}/>
+          
+          
+            <TextField
+          required
+          id="outlined-required"
+          label="Mot de passe"
+          type="password"
+          name="password"
+          onChange={e => this.setState({password: e.target.value})} 
+          value={password}
+          defaultValue=""
+          variant="outlined"
+          helperText= {this.state.loginFailed == true ? "Incorrect logins !" : ""} 
+        />
           </div>
+
+
+          <div id="buttons">
+        <Button className="button" variant="contained" color="secondary" value="Login" onClick={this.register}>
+          Register
+        </Button>
+        <Button className="button" variant="contained" color="secondary" value="Login" onClick={this.onSubmit}>
+          Login
+        </Button>
         </div>
 
-        <input type="submit" value="Login" />
+
+        </div>
+
+        
 
         <div className="message">
           { isLoginPending && <div>Please wait...</div> }
@@ -39,6 +89,9 @@ class LoginForm extends Component {
           { loginError && <div>Authentication failed.</div> }
         </div>
       </form>
+      </CardContent>
+      </Card>
+      </div>
     )
   }
 
@@ -48,9 +101,15 @@ class LoginForm extends Component {
     this.props.login(email, password)
     this.setState({
       email: '',
-      password: ''
+      password: '',
+      loginFailed: true
     });
   }
+  
+register() {
+  console.log("Unavailable feature : Register new user ! It should arrive soon !")
+}
+
 }
 
 
