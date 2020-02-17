@@ -142,12 +142,16 @@ class PluginUploadForm extends Component{
 
               <p>
                 Upload Plugin zip
+              
+                 <input id="raised-button-file"  type="file" name="file" onChange={e =>  this.setState({
+                    zipFile: e.target.files[0],
+                    loaded: 0,
+                  })}/>
                 
-                 <input id="raised-button-file"  type="file" name="file" onChange={this.onChangeHandler}/>
               </p>
 
               <p>
-                Open Source?  <Checkbox onChange={this.handleCheckBoxChange}/>
+                Open Source?  <Checkbox onChange={e => this.setState({open_source: !open_source})}/>
               </p>
                 
 
@@ -155,24 +159,9 @@ class PluginUploadForm extends Component{
                 Submit
               </Button>
                   
-          </div>
+              </div>
         </form>
         );
-    }
-
-
-    fileUploadOnChangeHandler=event=>{
-      this.setState({
-        zipFile: event.target.files[0],
-        loaded: 0,
-      })
-    }
-
-    handleCheckBoxChange() {
-      console.log("change open source de à ");
-      //console.log(this.state.open_source);
-      //this.setState({open_source: "!this.state.open_source"});
-      //console.log(this.state.open_source);
     }
 
     onSubmit(e) {
@@ -188,11 +177,13 @@ class PluginUploadForm extends Component{
             category,
             tags,
             authorId,
-            zipFile,
         } = this.state;
 
 
-        this.props.upload(name, description, video_url, image_url, version, open_source, category, tags, authorId, zipFile);
+console.log("___ payload to submit in request : _____");
+console.log(this.state);
+
+        this.props.upload(name, description, video_url, image_url, version, open_source, category, tags, authorId,);
         this.setState({
             name: "",
             description: "",
@@ -208,14 +199,12 @@ class PluginUploadForm extends Component{
     }
 }
 
-const upload = (name, description, video_url, image_url, version, open_source, category, tags, authorId, zipFile) => {
+const upload = (name, description, video_url, image_url, version, open_source, category, tags, authorId) => {
     return dispatch => {
       dispatch(setPluginUploadPending(true));
 
-      console.log('zip file : ');
-        console.log(zipFile);
   
-      callPluginUploadApi(name, description, video_url, image_url, version, open_source, category, tags, authorId, zipFile, (error) => {
+      callPluginUploadApi(name, description, video_url, image_url, version, open_source, category, tags, authorId,  (error) => {
         if (error) {
           dispatch(setPluginUploadPending(false));
           dispatch(setPluginUploadError(true));
