@@ -3,6 +3,7 @@ form[name="loginForm"] {
     flex-direction: column;
     width: 450px;
     padding: 10px;
+    background-color: white!important;
   }
   
   .form-group {
@@ -12,6 +13,7 @@ form[name="loginForm"] {
     width: 100%;
     display: flex;
     align-items: center;
+    background-color: white!important;
   }
   
   label {
@@ -61,6 +63,7 @@ form[name="loginForm"] {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: white!important;
   }
 
   .rootDiv {
@@ -69,14 +72,16 @@ form[name="loginForm"] {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    
   }
 
   .card{
     width: 30%;
     min-width: 400px;
     margin-bottom: 3%;
-    color: #69585F; 
+    background-color: white!important;
   }
 
+  body {
+    background-color: #68585f!important;
+  }
   

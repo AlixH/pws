@@ -34,7 +34,7 @@ class LoginForm extends Component {
     let {isLoginPending, isLoginSuccess, loginError} = this.props;
     return (
       <div className="rootDiv">
-        <Card raised={"true"} className={"card"} >
+        <Card raised={"true"} className={"card"} color="primary" >
             <CardContent >
       <form name="loginForm" onSubmit={this.onSubmit}>
         <div className="form-group-collection">
@@ -73,7 +73,7 @@ class LoginForm extends Component {
         <Button className="button" variant="contained" color="secondary" value="Login" onClick={this.register}>
           Register
         </Button>
-        <Button className="button" variant="contained" color="secondary" value="Login" onClick={this.onSubmit}>
+        <Button className="button" variant="contained" color="primary" value="Login" onClick={this.onSubmit}>
           Login
         </Button>
         </div>
