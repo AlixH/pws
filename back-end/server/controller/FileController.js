@@ -4,6 +4,11 @@ const GridFsStorage = require('multer-gridfs-storage');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const ObjectID = require('mongodb').ObjectID;
+const path     = require("path");
+const Unzipper = require("decompress-zip");
+const fs = require("fs");
+
+const extract = require('extract-zip');
 
 let storage = new GridFsStorage({
     url:  config.DbConfig.DBURL,
@@ -15,28 +20,68 @@ let storage = new GridFsStorage({
     }
 });
 
+const localStorage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: (req, file, cb) => {
+      cb(null, `${file.originalname}`);
+    }
+});
+
+
 let upload = null;
+let localDestination = multer({storage: localStorage});
+
+
+const unzipFile = (source, destination, next) => {
+    console.log(`gonna unzip ${source} in ${destination}`);
+    extract(source, {dir: destination},function (err) {
+       console.log(`__error : ${err}`);
+   });
+
+    next();
+}
+
+async function fileUpload(req, res, next) {
+    localDestination.single('file1')(req, res, next)
+    next();
+}
+
 
 storage.on('connection', (db) => {
     //Setting up upload for a single file
     upload = multer({
         storage: storage
     }).single('file1');
-
 });
 
-module.exports.uploadFile = (req, res) => {
-    console.log("uploadFile");
+
+module.exports.uploadFile = async (req, res) => {
+
     upload(req, res, (err) => {
         if(err){
             console.log(err);
             return res.status(500).send({title: 'Uploaded Error', message: 'File could not be uploaded', error: err});
         }
-        console.log("req " + req);
-        console.log("req " + req.file);
-        console.log("req " + req.file.filename);
+    
+        // the zip file's source and unzipped file's destination
+        let source = `./uploads/${req.file.filename}`; 
+        let destination = `${__dirname}/../../uploads/`;
+
+        // unzip
+        let fileUnziped =  unzipFile(source, destination, () => {
+            console.log("file has been unziped !");
+        });
+
         res.status(200).send({title: 'Uploaded', message: `File ${req.file.filename} has been uploaded!`});
     });
+
+
+    // upload the file
+    let fileUploaded = fileUpload(req, res, () => {
+        console.log(`file has been uploaded !`);
+    })
 };
 
 module.exports.getFile = (req, res) => {
