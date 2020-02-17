@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
-function Plugin(pId, name, description, videoUrl, imageUrl, tags, version, open_source, category, comments, authorId, nb_ratings, total_score ){
-    this.pId = pId;
+function Plugin(pluginId, name, description, video_url, image_url, tags, version, open_source, category, comments, authorId, ratings, score){
+    this.pluginId = pluginId;
     this.name = name;
     this.description = description;
-    this.videoUrl = videoUrl;
-    this.imageUrl = imageUrl;
+    this.video_url = video_url;
+    this.image_url = image_url;
     this.tags = tags;
     this.version = version;
     this.open_source = open_source;
@@ -12,9 +12,9 @@ function Plugin(pId, name, description, videoUrl, imageUrl, tags, version, open_
     this.comments = comments;
     this.authorId =authorId;
     // nb of times the plugin has been rated
-    this.nb_ratings = nb_ratings;
+    this.ratings = ratings;
     // mean rating
-    this.score = total_score/nb_ratings;
+    this.score = score/ratings;
 }
 
 module.exports = Plugin;
