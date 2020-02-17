@@ -7,8 +7,11 @@ form[name="loginForm"] {
   
   .form-group {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
   
   label {
@@ -24,6 +27,7 @@ form[name="loginForm"] {
     padding: 3px;
     flex-grow: 1;
     font-size: 25px;
+    width: 50%;
   }
   
   input[type="submit"] {
@@ -41,3 +45,38 @@ form[name="loginForm"] {
     margin-top: 10px;
     text-align: right;
   }
+
+  #buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 92%;
+  }
+
+  .button {
+    width: 27%;
+  }
+
+  .form-group-collection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rootDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+  }
+
+  .card{
+    width: 30%;
+    min-width: 400px;
+    margin-bottom: 3%;
+    color: #69585F; 
+  }
+
+  
