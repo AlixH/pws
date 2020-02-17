@@ -58,27 +58,30 @@ storage.on('connection', (db) => {
 
 
 module.exports.uploadFile = async (req, res) => {
-    console.log("uploadFile");
+
     upload(req, res, (err) => {
         if(err){
             console.log(err);
             return res.status(500).send({title: 'Uploaded Error', message: 'File could not be uploaded', error: err});
         }
-        console.log("____");
-        console.log(req.file.filename);
-        console.log("____");
+    
+        // the zip file's source and unzipped file's destination
+        let source = `./uploads/${req.file.filename}`; 
+        let destination = `${__dirname}/../../uploads/`;
+
+        // unzip
+        let fileUnziped =  unzipFile(source, destination, () => {
+            console.log("file has been unziped !");
+        });
+
         res.status(200).send({title: 'Uploaded', message: `File ${req.file.filename} has been uploaded!`});
     });
 
-    let fileUploaded = await fileUpload(req, res, () => {
-        console.log("dnas le next()");
-    });
 
-    //let source = await `./uploads/${req.file.fileName}`;
-    let source = `./uploads/helloWorld-ZIPPE.png.zip`;
-    let fileUnziped =  unzipFile(source, '/Users/soufiane/Desktop/polytech/pws/back-end/uploads/zz', () => {
-        console.log("file unziped !");
-    });
+    // upload the file
+    let fileUploaded = fileUpload(req, res, () => {
+        console.log(`file has been uploaded !`);
+    })
 };
 
 module.exports.getFile = (req, res) => {
