@@ -177,13 +177,14 @@ class PluginUploadForm extends Component{
             category,
             tags,
             authorId,
+            zipFile,
         } = this.state;
 
 
 console.log("___ payload to submit in request : _____");
 console.log(this.state);
 
-        this.props.upload(name, description, video_url, image_url, version, open_source, category, tags, authorId,);
+        this.props.upload(name, description, video_url, image_url, version, open_source, category, tags, authorId, zipFile);
         this.setState({
             name: "",
             description: "",
@@ -199,12 +200,12 @@ console.log(this.state);
     }
 }
 
-const upload = (name, description, video_url, image_url, version, open_source, category, tags, authorId) => {
+const upload = (name, description, video_url, image_url, version, open_source, category, tags, authorId, zipFile) => {
     return dispatch => {
       dispatch(setPluginUploadPending(true));
 
   
-      callPluginUploadApi(name, description, video_url, image_url, version, open_source, category, tags, authorId,  (error) => {
+      callPluginUploadApi(name, description, video_url, image_url, version, open_source, category, tags, authorId, zipFile, (error) => {
         if (error) {
           dispatch(setPluginUploadPending(false));
           dispatch(setPluginUploadError(true));
@@ -265,7 +266,7 @@ const upload = (name, description, video_url, image_url, version, open_source, c
  * @param {*} tags
  * @param {*} callback
  */
-const callPluginUploadApi = async (name, description, video_url, image_url, version, open_source, category, tags, authorId, callback) => {
+const callPluginUploadApi = async (name, description, video_url, image_url, version, open_source, category, tags, authorId, zipFile, callback) => {
     let Url = `http://localhost:4000/plugins/add`;
     let response = await fetch(Url, {
         method: 'post',
@@ -276,15 +277,19 @@ const callPluginUploadApi = async (name, description, video_url, image_url, vers
         },
         body: JSON.stringify({
             "name": name,
+            "author": authorId,
             "description": description,
             "video_url": video_url,
-            "image_url": image_url,
+            "thumbnail_url": image_url,
             "version": version,
-            "open_source": open_source,
+            "opensource": open_source,
             "category": category,
             "tags": tags,
             "authorId": authorId,
+            "zip_url": zipFile,
         })
+
+       
     });
   
     await response.json().then((data) => {
@@ -296,6 +301,7 @@ const callPluginUploadApi = async (name, description, video_url, image_url, vers
         }
     });
 }
+
 
 const mapStateToProps = (state) => {
     return {
