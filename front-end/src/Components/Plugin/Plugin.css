@@ -1,4 +1,44 @@
-#plugin-preview{
+.plugin_preview{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+img{
+    width: 80%;
+}
+
+.tags{
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.tag{
+    margin-right: 2%;
+}
+
+.plugin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h2, h1{
+    color: #69585F;
+    font-family: "Calibri Light";
+}
+
+h1{
+    font-weight: bolder;
+}
+
+.card{
+    width: 30%;
+    min-width: 400px;
+    margin-bottom: 3%;
+    color: #69585F;
+
 }
