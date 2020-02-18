@@ -1,8 +1,10 @@
-.plugin_preview{
+
+
+.bottom{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
     width: 100%;
+    padding: 2%;
 }
 img{
     width: 80%;
@@ -12,27 +14,116 @@ img{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: flex-end;
+    width: 80%;
+    flex-wrap: wrap;
+}
+
+
+
+.top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+    align-items: center;
+}
+
+.version{
+    margin: 0;
+    font-weight: bolder;
+}
+
+.date{
+    margin: 0;
 }
 
 .tag{
     margin-right: 2%;
+    margin-bottom: 2%;
+}
+.image{
+    background-color: whitesmoke;
+    border: solid 1px whitesmoke;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.MuiCardContent-root{
+    padding: 0!important;
+
 }
 
 .plugin{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: stretch;
+}
+
+.version_date{
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
 }
 
 h2, h1{
     color: #69585F;
-    font-family: "Calibri Light";
 }
 
+.MuiChip-label{
+    font-size: 12px;
+}
+
+.rating_comment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#comments_showed{
+    display: flex;
+}
+
+#comments_toggled{
+    display: none;
+}
+
+.comments_section{
+    flex-direction: column ;
+    align-items: center;
+
+}
+
+
+.comments_logo_wrapper:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.comments_logo_wrapper_hidden {
+    display: none;
+
+}
+
+#tooltip{
+    font-size: 12px;
+}
+
+
 h1{
-    font-weight: bolder;
+    font-family: Roboto;
+    color: black;
+}
+
+.MuiChip-root{
+    color: #82d85d;
 }
 
 .card{
@@ -40,5 +131,6 @@ h1{
     min-width: 400px;
     margin-bottom: 3%;
     color: #69585F;
+    max-height: min-content;
 
 }

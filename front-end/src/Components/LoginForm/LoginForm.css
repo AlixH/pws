@@ -72,6 +72,11 @@ form[name="loginForm"] {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: #68585f!important;
+    top : 0;
+    left: 0;
+    bottom:0;
+    right:0;
   }
 
   .card{
@@ -81,7 +86,4 @@ form[name="loginForm"] {
     background-color: white!important;
   }
 
-  body {
-    background-color: #68585f!important;
-  }
   

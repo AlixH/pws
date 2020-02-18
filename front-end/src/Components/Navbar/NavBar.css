@@ -1,5 +1,9 @@
 .nav-bar{
-    background-color: black;
-    height: 7%;
+    height: 5%;
+    width: 100%;
+    z-index: 3;
+    background-color: #69585F;
+    position: fixed;
+    top: 0;
 }
 
