@@ -1,44 +1,15 @@
-*{
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
+.card{
+    margin: 120px auto;
 }
 
-html{
-    text-align: center;
+p {
+    color: tomato;
+    display: inline-block;
 }
 
-body{
-    background-color: rgb(30, 30, 30);
-    margin: 5px;
+.textField {
+    width: 100%;
 }
-
-form{
-    background-color: rgb(50, 50, 50);
-    margin: 5px auto;
-    padding: 5px;
-    border-radius: 5px;
-    color: white;
-    width: 400px;
-}
-
-input, textarea, .checkbox-input-wrapper{
-    background-color: rgb(150, 150, 150);
-    border: none;
-    display: block;
-    width: 300px;
-    margin: 2px auto;
-    padding: 2px;
-    line-height: 3em;
-    border-radius: 3px;
-}
-
-input[type="submit"]{
-    color: black;
-    line-height: 1em;
-}
-
-.checkbox-input-wrapper *{
-    display: inline;
-    width: 45%;
+.button {
+    width: 100%;
 }
