@@ -12,6 +12,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import CardHeader from '@material-ui/core/CardHeader';
 
+let fs = require('fs');
+
 class PluginUploadForm extends Component {
 	constructor(props) {
 		super(props);
@@ -187,7 +189,39 @@ class PluginUploadForm extends Component {
 		} = this.state;
 
 		console.log("___ payload to submit in request : _____");
-		console.log(this.state);
+    console.log(this.state);
+    
+
+    let upload_zipfile_Url = `http://localhost:4000/files/upload`;
+
+    const formData = new FormData();
+
+  //formData.append('file', fs.readFileSync(zipFile));
+  formData.append('file1', zipFile);
+  
+  fetch(upload_zipfile_Url, {
+      method: 'POST',
+      headers: {
+        //'Accept': 'application/json',
+        'Content-Type': "application/x-www-form-urlencoded"
+      },
+      body: formData,
+  });
+
+  //const fileInput = document.querySelector('#your-file-input') ;
+  /*const formData = new FormData();
+
+  formData.append('file', zipFile);
+
+  const options = {
+    method: 'POST',
+    body: formData,
+  };
+
+  console.log("form data : ");
+  console.log(formData);
+  fetch(upload_zipfile_Url, options);
+  */
 
 		this.props.upload(name, description, video_url, image_url, version, open_source, category, tags, authorId, zipFile);
 		this.setState({
@@ -288,9 +322,26 @@ const callPluginUploadApi = async (name, description, video_url, image_url, vers
 			"category": category,
 			"tags": tags,
 			"authorId": authorId,
-			"zip_url": zipFile,
+			"zip_url": "zip_url",
 		})
-	});
+  });
+  
+/*
+  let upload_zipfile_Url = `http://localhost:4000/files/upload`;
+
+  const formData = new FormData();
+  console.log(`${zipFile}`);
+formData.append('file', fs.createReadStream(zipFile));
+fetch('http://httpbin.org/post', {
+    method: 'POST',
+    headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+    body: formData
+});
+*/
+
 
 	await response.json().then((data) => {
 		if (data.status === "error") {
@@ -299,8 +350,10 @@ const callPluginUploadApi = async (name, description, video_url, image_url, vers
 		} else {
 			callback(false);
 		}
-	});
+  });
+
 }
+
 
 const mapStateToProps = (state) => {
 	return {

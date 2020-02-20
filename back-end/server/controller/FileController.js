@@ -44,6 +44,7 @@ const unzipFile = (source, destination, next) => {
 }
 
 async function fileUpload(req, res, next) {
+    console.log(`$$$$$$$$$$$$$$$$$$$    dans fileUoload ${req.file1}`);
     localDestination.single('file1')(req, res, next)
     next();
 }
@@ -59,6 +60,7 @@ storage.on('connection', (db) => {
 
 module.exports.uploadFile = async (req, res) => {
 
+    console.log("============ "+req.file);
     upload(req, res, (err) => {
         if(err){
             console.log(err);
@@ -66,6 +68,7 @@ module.exports.uploadFile = async (req, res) => {
         }
     
         // the zip file's source and unzipped file's destination
+        console.log(`____________________ ${req.file}`);
         let source = `./uploads/${req.file.filename}`; 
         let destination = `${__dirname}/../../uploads/`;
 
