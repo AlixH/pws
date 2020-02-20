@@ -121,4 +121,42 @@ module.exports = {
             }
         });
     },
+
+    /**
+     * Get plugin's score
+    */
+   comment: (req, res, next) => {
+        console.log(">>> comment <<<");
+
+        let pluginId = req.body.pluginId;
+        let commentText = req.body.commentText;
+
+        Plugin.findOne({_id: pluginId}, (err, plugin) => {
+            if(err){
+                next(err);
+            } else{
+                let comments = plugin.comments;
+                comments.push(commentText);
+                Plugin.updateOne({_id: plugin._id}, {comments: comments}, (error, p) => {
+                    if(error){
+                        next(error);
+                    } else{
+                        res.json({status: "Success", message: `Comment ${commentText} has been added to plugin ${plugin.name}`, data: null});
+                    }
+                });
+            }
+        });
+   },
+};
+
+/**
+ * Echapper les caractères spéciaux HTML
+*/
+let escapeHtml = (unsafe) => {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 };
