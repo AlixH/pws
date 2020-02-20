@@ -9,4 +9,5 @@ module.exports = (Application) => {
     Application.route('/plugins/:pluginId').delete(Controller.PluginController.deleteById);
     Application.route('/plugins/rate').post(Controller.PluginController.rate);
     Application.route('/plugins/get-score').post(Controller.PluginController.getScore);
+    Application.route('/plugins/comment').post(Controller.PluginController.comment);
 };
