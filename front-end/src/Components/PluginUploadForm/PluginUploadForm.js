@@ -53,123 +53,125 @@ class PluginUploadForm extends Component {
 		} = this.props;
 
 		return (
-			<Card raised={"true"} className={"card"}>
-				<CardHeader title={"Upload Plugin"}>
-				</CardHeader>
-				<CardContent>
-					<form name="pluginUploadForm">
-						<Grid container spacing={1}>
-							<Grid item xs={12} sm={6}>
-								<TextField margin={"normal"}  className={"textField"}
-									required
-									id="outlined-required"
-									name="name"
-									label="Name"
-									defaultValue=""
-									variant="outlined"
-									value={this.state.value}
-									onChange={e => this.setState({ name: e.target.value })}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<TextField margin={"normal"}  className={"textField"}
-									required
-									id="outlined-required"
-									name="description"
-									label="description"
-									defaultValue=""
-									variant="outlined"
-									onChange={e => this.setState({ description: e.target.value })}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<TextField margin={"normal"}  className={"textField"}
-									required
-									id="outlined-required"
-									name="video_url"
-									label="Video URL"
-									defaultValue=""
-									variant="outlined"
-									onChange={e => this.setState({ video_url: e.target.value })}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<TextField margin={"normal"}  className={"textField"}
-									required
-									id="outlined-required"
-									name="image_url"
-									label="Image URL"
-									defaultValue=""
-									variant="outlined"
-									onChange={e => this.setState({ image_url: e.target.value })}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<TextField margin={"normal"}  className={"textField"}
-									required
-									id="outlined-required"
-									name="version"
-									label="Version"
-									defaultValue=""
-									variant="outlined"
-									onChange={e => this.setState({ version: e.target.value })}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<TextField margin={"normal"}  className={"textField"}
-									required
-									id="outlined-required"
-									name="category"
-									label="Category"
-									defaultValue=""
-									variant="outlined"
-									onChange={e => this.setState({ category: e.target.value })}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<TextField margin={"normal"}  className={"textField"}
-									required
-									id="outlined-required"
-									name="tags"
-									label="Tags"
-									defaultValue=""
-									variant="outlined"
-									onChange={e => this.setState({ tags: e.target.value })}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<TextField margin={"normal"}  className={"textField"}
-									required
-									id="outlined-required"
-									name="authorId"
-									label="Author Id"
-									defaultValue=""
-									variant="outlined"
-									onChange={e => this.setState({ authorId: e.target.value })}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<Button variant="contained" component="label" >
-									Upload ZIP File
-									<input id="raised-button-file" type="file" name="file" style={{ display: "none" }} 
-										onChange={e => this.setState({zipFile: e.target.files[0], loaded: 0})}
+			<div className="rootDiv">
+				<Card raised={"true"} className={"card PluginUploadFormCard"}>
+					<CardHeader title={"Upload Plugin"}>
+					</CardHeader>
+					<CardContent>
+						<form name="pluginUploadForm" enctype="multipart/form-data">
+							<Grid container spacing={1}>
+								<Grid item xs={12} sm={6}>
+									<TextField margin={"normal"} className={"textField"}
+										required
+										id="outlined-required"
+										name="name"
+										label="Name"
+										defaultValue=""
+										variant="outlined"
+										value={this.state.value}
+										onChange={e => this.setState({ name: e.target.value })}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<TextField margin={"normal"} className={"textField"}
+										required
+										id="outlined-required"
+										name="description"
+										label="description"
+										defaultValue=""
+										variant="outlined"
+										onChange={e => this.setState({ description: e.target.value })}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<TextField margin={"normal"} className={"textField"}
+										required
+										id="outlined-required"
+										name="video_url"
+										label="Video URL"
+										defaultValue=""
+										variant="outlined"
+										onChange={e => this.setState({ video_url: e.target.value })}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<TextField margin={"normal"} className={"textField"}
+										required
+										id="outlined-required"
+										name="image_url"
+										label="Image URL"
+										defaultValue=""
+										variant="outlined"
+										onChange={e => this.setState({ image_url: e.target.value })}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<TextField margin={"normal"} className={"textField"}
+										required
+										id="outlined-required"
+										name="version"
+										label="Version"
+										defaultValue=""
+										variant="outlined"
+										onChange={e => this.setState({ version: e.target.value })}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<TextField margin={"normal"} className={"textField"}
+										required
+										id="outlined-required"
+										name="category"
+										label="Category"
+										defaultValue=""
+										variant="outlined"
+										onChange={e => this.setState({ category: e.target.value })}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<TextField margin={"normal"} className={"textField"}
+										required
+										id="outlined-required"
+										name="tags"
+										label="Tags"
+										defaultValue=""
+										variant="outlined"
+										onChange={e => this.setState({ tags: e.target.value })}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<TextField margin={"normal"} className={"textField"}
+										required
+										id="outlined-required"
+										name="authorId"
+										label="Author Id"
+										defaultValue=""
+										variant="outlined"
+										onChange={e => this.setState({ authorId: e.target.value })}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<Button variant="contained" component="label" >
+										Upload ZIP File
+										<input id="raised-button-file" type="file" name="file1" style={{ display: "none" }}
+											onChange={(e) => { this.setState({ zipFile: e.target.files[0], loaded: 0 }); console.log(this.state.zipFile);}}
 										/>
-								</Button>
+									</Button>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<p>Open Source?</p>
+									<Checkbox onChange={e => this.setState({ open_source: !open_source })} />
+								</Grid>
+								<Grid item xs={12} sm={4}></Grid>
+								<Grid item xs={12} sm={4}>
+									<Button name="submit" className={"button"} variant="contained" color="primary" onClick={this.onSubmit}>
+										Submit
+									</Button>
+								</Grid>
 							</Grid>
-							<Grid item xs={12} sm={6}>
-								<p>Open Source?</p>
-								<Checkbox onChange={e => this.setState({ open_source: !open_source })} />
-							</Grid>
-							<Grid item xs={12} sm={4}></Grid>
-							<Grid item xs={12} sm={4}>
-								<Button name="submit" className={"button"} variant="contained" color="primary" onClick={this.onSubmit}>
-									Submit
-								</Button>
-							</Grid>
-						</Grid>
-					</form>
-				</CardContent>
-			</Card>
+						</form>
+					</CardContent>
+				</Card>
+			</div>
 		);
 	}
 
@@ -187,43 +189,33 @@ class PluginUploadForm extends Component {
 			authorId,
 			zipFile,
 		} = this.state;
-
+		
 		console.log("___ payload to submit in request : _____");
-    console.log(this.state);
-    
-
-    let upload_zipfile_Url = `http://localhost:4000/files/upload`;
-
-    const formData = new FormData();
-
-  //formData.append('file', fs.readFileSync(zipFile));
-  formData.append('file1', zipFile);
-  
-  fetch(upload_zipfile_Url, {
-      method: 'POST',
-      headers: {
-        //'Accept': 'application/json',
-        'Content-Type': "application/x-www-form-urlencoded"
-      },
-      body: formData,
-  });
-
-  //const fileInput = document.querySelector('#your-file-input') ;
-  /*const formData = new FormData();
-
-  formData.append('file', zipFile);
-
-  const options = {
-    method: 'POST',
-    body: formData,
-  };
-
-  console.log("form data : ");
-  console.log(formData);
-  fetch(upload_zipfile_Url, options);
-  */
+		console.log(this.state);
+		
+		
+		let upload_zipfile_Url = `http://localhost:4000/files/upload`;
+		
+		const formData = new FormData();
+		
+		//formData.append('file', fs.readFileSync(zipFile));
+		formData.append('file1', zipFile);
+		
+		// fetch(upload_zipfile_Url, {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		//'Accept': 'application/json',
+		// 		'Content-Type': "application/x-www-form-urlencoded"
+		// 	},
+		// 	body: formData,
+		// });
+		let request = new XMLHttpRequest();
+		request.open("POST", upload_zipfile_Url);
+		// request.setRequestHeader('Content-Type', "multipart/form-data");
+		request.send(formData);
 
 		this.props.upload(name, description, video_url, image_url, version, open_source, category, tags, authorId, zipFile);
+		
 		this.setState({
 			name: "",
 			description: "",
@@ -264,7 +256,7 @@ const setPluginUploadPending = (pluginUploadPending) => {
 		type: SET_PLUGINUPLOAD_PENDING,
 		pluginUploadPending
 	};
-}
+};
 
 /**
  * This action indicates that the plugin upload request has succeeded
@@ -275,7 +267,7 @@ const setPluginUploadSuccess = (pluginUploadSuccess) => {
 		type: SET_PLUGINUPLOAD_SUCCESS,
 		pluginUploadSuccess
 	};
-}
+};
 
 /**
  * This action indicates that the plugin upload request has failed
@@ -286,7 +278,7 @@ const setPluginUploadError = (pluginUploadError) => {
 		type: SET_PLUGINUPLOAD_ERROR,
 		pluginUploadError
 	}
-}
+};
 
 /**
  * This method is a callback after calling the upload method
@@ -324,24 +316,7 @@ const callPluginUploadApi = async (name, description, video_url, image_url, vers
 			"authorId": authorId,
 			"zip_url": "zip_url",
 		})
-  });
-  
-/*
-  let upload_zipfile_Url = `http://localhost:4000/files/upload`;
-
-  const formData = new FormData();
-  console.log(`${zipFile}`);
-formData.append('file', fs.createReadStream(zipFile));
-fetch('http://httpbin.org/post', {
-    method: 'POST',
-    headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-    body: formData
-});
-*/
-
+	});
 
 	await response.json().then((data) => {
 		if (data.status === "error") {
@@ -350,10 +325,9 @@ fetch('http://httpbin.org/post', {
 		} else {
 			callback(false);
 		}
-  });
+	});
 
-}
-
+};
 
 const mapStateToProps = (state) => {
 	return {
