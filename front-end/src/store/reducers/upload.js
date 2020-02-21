@@ -1,6 +1,6 @@
 import {UPLOAD} from "../actions/Upload";
 
-const defaultState = {};
+const defaultState = {upload:false};
 
 const uploadReducer = (state = defaultState, action) => {
     if (action.type === UPLOAD) {

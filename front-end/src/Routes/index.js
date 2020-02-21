@@ -21,7 +21,7 @@ function Routes (){
     const loggingIn = useSelector(state => state.logInReducer.login, shallowEqual);
     const upload = useSelector(state => state.uploadReducer.upload, shallowEqual);
     console.log(isLoggedIn);
-    
+    console.log(upload)
         return (
             <Router history={history}>
                 <Switch>

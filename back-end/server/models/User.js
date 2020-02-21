@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 7
+        minLength: 4
     },
     tokens: [{
         token: {
@@ -51,6 +51,7 @@ userSchema.methods.generateAuthToken = async function() {
     await user.save();
     return token
 };
+mongoose.set('debug', true);
 
 userSchema.statics.findByCredentials = async (email, password) => {
     console.log("findByCredentials");

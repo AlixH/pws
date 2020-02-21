@@ -11,6 +11,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import CardHeader from '@material-ui/core/CardHeader';
+import NavBar from "../Navbar/Navbar";
+import {UPLOAD} from "../../store/actions/Upload";
 
 class PluginUploadForm extends Component {
 	constructor(props) {
@@ -32,6 +34,7 @@ class PluginUploadForm extends Component {
 	}
 
 	render() {
+
 		let {
 			name,
 			description,
@@ -51,6 +54,8 @@ class PluginUploadForm extends Component {
 		} = this.props;
 
 		return (
+			<div>
+				<NavBar/>
 			<Card raised={"true"} className={"card"}>
 				<CardHeader title={"Upload Plugin"}>
 				</CardHeader>
@@ -168,6 +173,7 @@ class PluginUploadForm extends Component {
 					</form>
 				</CardContent>
 			</Card>
+			</div>
 		);
 	}
 
