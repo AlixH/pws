@@ -19,21 +19,26 @@ function Routes (){
 
     const isLoggedIn = useSelector(state => state.loginSuccessReducer.isLoginSuccess, shallowEqual);
     const loggingIn = useSelector(state => state.logInReducer.login, shallowEqual);
+    const upload = useSelector(state => state.uploadReducer.upload, shallowEqual);
     console.log(isLoggedIn);
     
         return (
             <Router history={history}>
                 <Switch>
                     <Route path="/home" render={() => (
-                        loggingIn ? <LoginForm/> : <Home/>
+                        loggingIn ? <Redirect to={'/login'}/> : (upload ? <Redirect to={"/plugin-upload"}/> : <Home/>)
                     )}/>
                     <Route path="/login" render={() => (
                         isLoggedIn ? <Redirect to={"/home"}/> : <LoginForm/>
                     )}/>
                     <Route path="/plugin-upload" render={() => (
-                        isLoggedIn ? <PluginUploadForm/> : <Redirect to={"/login"}/>
+                       isLoggedIn ? <PluginUploadForm/> : <Redirect to={"/login"}/>
                     )}/>
-                    <Route path="/*" exact render={()=> <div>No page found</div>}> </Route>
+                    <Route path={"*"} render={() => (
+                        <Redirect to={"/home"}/>
+                    )}>
+                    </Route>
+
                 </Switch>
             </Router>
         )

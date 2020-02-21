@@ -9,6 +9,8 @@ import pluginUploadErrorReducer from "./PluginUploadReducers/PluginUploadError";
 
 import pluginListReducer from "./PluginList";
 import openPluginReducer from "./OpenPluginDetails";
+import logInReducer from "./Login";
+import uploadReducer from "./upload";
 
 const reducers = combineReducers({
     loginErrorReducer,
@@ -19,6 +21,8 @@ const reducers = combineReducers({
     pluginUploadSuccessReducer,
     pluginListReducer,
     openPluginReducer,
+    logInReducer,
+    uploadReducer
 
 });
 

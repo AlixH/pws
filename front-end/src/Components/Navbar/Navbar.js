@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {SET_LOGIN_SUCCESS} from "../../store/actions/LoginSuccess";
 import shallowEqual from "react-redux/lib/utils/shallowEqual";
 import {LOG_IN} from "../../store/actions/LogIn";
-
+import {UPLOAD} from "../../store/actions/Upload";
 
 
 function NavBar(properties) {
@@ -19,30 +19,40 @@ function NavBar(properties) {
 
     function logOut() {
         dispatch({
-            type:SET_LOGIN_SUCCESS,
-            isLoginSuccess:false
+            type: SET_LOGIN_SUCCESS,
+            isLoginSuccess: false
         })
 
     }
 
     function logIn() {
         dispatch({
-            type:LOG_IN,
-            login:true
+            type: LOG_IN,
+            login: true
         })
 
     }
 
+    function openUploadForm() {
+        dispatch({
+            type:UPLOAD,
+            upload:true
+        })
+    }
+
     // let plugin = new PluginModel(...properties.plugin);
-    return(
-        <div className={"nav-bar"} >
+    return (
+        <div className={"nav-bar"}>
             <h1 id={"site_title"}>Gallerie de plugins</h1>
-            <div>
-                {isLoggedIn ?
-                    <Button onClick={() => logOut()}>Déconnexion</Button>
-                    :  <Button onClick={() => logIn()}>Connexion</Button>
-                }
-            </div>
+            {isLoggedIn ?
+                <div id={"buttons"}>
+                    <Button id={"upload_button"} size={"large"}  onClick={() => openUploadForm()} >Upload un plugin</Button>
+                    <Button id={"logout_button"} size={"large"}  onClick={() => logOut()}>Déconnexion</Button>
+
+                </div>
+                :
+                <Button id={"login_button"} size={"large"} onClick={() => logIn()}>Connexion</Button>
+            }
         </div>
 
     )
