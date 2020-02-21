@@ -10,6 +10,7 @@ import PluginUploadForm from '../Components/PluginUploadForm/PluginUploadForm';
 import Redirect from "react-router-dom/es/Redirect";
 import {useSelector} from "react-redux";
 import shallowEqual from "react-redux/lib/utils/shallowEqual";
+import NavBar from "../Components/Navbar/Navbar";
 
 
 const history = createBrowserHistory();
@@ -17,12 +18,15 @@ const history = createBrowserHistory();
 function Routes (){
 
     const isLoggedIn = useSelector(state => state.loginSuccessReducer.isLoginSuccess, shallowEqual);
+    const loggingIn = useSelector(state => state.logInReducer.login, shallowEqual);
     console.log(isLoggedIn);
     
         return (
             <Router history={history}>
                 <Switch>
-                    <Route path="/home" exact component={Home}/>
+                    <Route path="/home" render={() => (
+                        loggingIn ? <LoginForm/> : <Home/>
+                    )}/>
                     <Route path="/login" render={() => (
                         isLoggedIn ? <Redirect to={"/home"}/> : <LoginForm/>
                     )}/>
