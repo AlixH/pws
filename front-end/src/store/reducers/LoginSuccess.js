@@ -5,8 +5,7 @@ const homePageURL = "http://localhost:3000/home";  // warning, the port is hardc
 
 const loginSuccessReducer = (state = defaultState, action) => {
     if (action.type === SET_LOGIN_SUCCESS) {
-        window.location.href=homePageURL;
-        return {loginError : action.isLoginSuccess};
+        return {...state, isLoginSuccess: action.isLoginSuccess};
     } else {
         return state;
     }

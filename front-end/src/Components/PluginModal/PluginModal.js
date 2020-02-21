@@ -14,6 +14,7 @@ function PluginModal() {
     const dispatch = useDispatch();
     const openPlugin = useSelector(state => state.openPluginReducer.plugin, shallowEqual);
     const pluginsList = useSelector(state => state.pluginListReducer.pluginsList, shallowEqual);
+    const isLoggedIn = useSelector(state => state.loginSuccessReducer.isLoginSuccess, shallowEqual);
     const plugin = pluginsList[openPlugin];
 
 
@@ -47,12 +48,24 @@ function PluginModal() {
                 <div className={"card"}>
                     <Card raised={true}>
                         <CardContent>
-                            <div>
+                            <div id={"test"}>
                                 <h1 className={"card_title"}>Test</h1>
                             </div>
                         </CardContent>
                     </Card>
                 </div>
+                {isLoggedIn ?
+                    <div className={"card"}>
+                        <Card raised={true}>
+                            <CardContent>
+                                <div id={"test"}>
+                                    <h1 className={"card_title"}>Votre avis</h1>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                    : null
+                }
             </div>
         </Modal>
 

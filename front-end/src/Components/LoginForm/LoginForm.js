@@ -159,7 +159,11 @@ const login = (email, password) => {
         dispatch(setLoginError(true));
       } else {
         dispatch(setLoginPending(false));
-        dispatch(setLoginSuccess());
+        dispatch({
+          type:SET_LOGIN_SUCCESS,
+          isLoginSuccess:true
+            }
+        );
       }
     });
   }

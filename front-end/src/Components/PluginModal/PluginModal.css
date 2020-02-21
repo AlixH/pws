@@ -12,6 +12,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 2%;
+    flex-wrap: wrap;
 }
 
 #description{
@@ -22,6 +23,10 @@
     word-break: break-word;
     overflow-y: auto;
     margin-bottom: 3%;
+}
+
+#test{
+    text-align: center;
 }
 .card{
     width: 30%;

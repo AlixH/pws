@@ -7,22 +7,31 @@ import LoginForm from '../Components/LoginForm/LoginForm';
 import { createBrowserHistory } from "history";
 import Home from '../Components/Home';
 import PluginUploadForm from '../Components/PluginUploadForm/PluginUploadForm';
+import Redirect from "react-router-dom/es/Redirect";
+import {useSelector} from "react-redux";
+import shallowEqual from "react-redux/lib/utils/shallowEqual";
 
 
 const history = createBrowserHistory();
 
-export default class Routes extends React.Component{    
-    render(){
+function Routes (){
+
+    const isLoggedIn = useSelector(state => state.loginSuccessReducer.isLoginSuccess, shallowEqual);
+    console.log(isLoggedIn);
+    
         return (
             <Router history={history}>
                 <Switch>
                     <Route path="/home" exact component={Home}/>
                     <Route path="/" exact component={Home}/>
-                    <Route path="/login" exact component={LoginForm}/>
+                    <Route path="/login" render={() => (
+                        isLoggedIn ? <Redirect to={"/home"}/> : <LoginForm/>
+                    )}/>
                     <Route path="/plugin-upload" exact component={PluginUploadForm}/>
                     <Route path="/*" exact render={()=> <div>No page found</div>}> </Route>
                 </Switch>
             </Router>
         )
-    }
 }
+
+export default Routes
