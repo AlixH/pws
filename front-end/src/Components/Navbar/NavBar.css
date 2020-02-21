@@ -5,5 +5,12 @@
     background-color: #69585F;
     position: fixed;
     top: 0;
+    display: flex;
+    flex-direction: row;
+    padding-left: 2%;
+    padding-right: 2%;
+    justify-content: space-between;
+    align-items: center;
+
 }
 

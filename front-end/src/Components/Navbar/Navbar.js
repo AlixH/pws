@@ -10,9 +10,12 @@ const PluginModel = require("../../model/plugin-model");
 
 function NavBar(properties) {
     // let plugin = new PluginModel(...properties.plugin);
-    return (
+    return(
         <div className={"nav-bar"} >
-
+            <h1>Plug</h1>
+            <div>
+                qdf
+            </div>
         </div>
 
     )

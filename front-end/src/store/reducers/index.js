@@ -8,6 +8,7 @@ import pluginUploadSuccessReducer from "./PluginUploadReducers/PluginUploadSucce
 import pluginUploadErrorReducer from "./PluginUploadReducers/PluginUploadError";
 
 import pluginListReducer from "./PluginList";
+import openPluginReducer from "./OpenPluginDetails";
 
 const reducers = combineReducers({
     loginErrorReducer,
@@ -17,6 +18,8 @@ const reducers = combineReducers({
     pluginUploadPendingReducer,
     pluginUploadSuccessReducer,
     pluginListReducer,
+    openPluginReducer,
+
 });
 
 export default reducers;

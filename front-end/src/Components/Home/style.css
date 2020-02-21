@@ -5,6 +5,8 @@
     width: 80%;
     justify-content: space-evenly;
     padding-top:4%;
+    align-items: flex-start;
+
 }
 
 #page{
@@ -17,4 +19,5 @@
 body{
     background-color: white!important;
 }
+
 

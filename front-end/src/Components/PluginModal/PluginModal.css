@@ -1,0 +1,36 @@
+#modal{
+    z-index: 4;
+    background-color: white;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    outline: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+}
+
+#description{
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    text-align: center;
+    word-break: break-word;
+    overflow-y: auto;
+    margin-bottom: 3%;
+}
+.card{
+    width: 30%;
+
+}
+
+.card_title{
+    font-family: Roboto;
+    font-weight: bold;
+}
+
+
