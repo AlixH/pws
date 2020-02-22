@@ -24,6 +24,7 @@
     color: white;
 }
 
+
 #logout_button{
     background-color: #F50057;
     color: whitesmoke;
@@ -31,14 +32,15 @@
 
 #upload_button{
     background-color: white;
+    margin-right: 3%;
 }
 
 #buttons{
     display: flex;
     flex-direction: row;
-    width: 15%;
+    width: 12%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 #login_button{
