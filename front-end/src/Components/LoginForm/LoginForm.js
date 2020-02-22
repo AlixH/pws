@@ -1,5 +1,5 @@
-import React, {Component, useState} from 'react';
-import {connect, useDispatch} from 'react-redux';
+import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 import './LoginForm.css';
 import {SET_LOGIN_PENDING} from "../../store/actions/LoginPending";
 import {SET_LOGIN_SUCCESS} from "../../store/actions/LoginSuccess";
@@ -8,13 +8,12 @@ import {SET_LOGIN_ERROR} from "../../store/actions/LoginError";
 import TextField from '@material-ui/core/TextField';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import {LOG_IN} from "../../store/actions/LogIn";
 import Button from "@material-ui/core/Button";
 
 function LoginForm() {
 
     const [email, setEmail] = useState("");
-    const [password, setEPassword] = useState("");
+    const [password,setEPassword] = useState("");
     const dispatch = useDispatch();
 
     function register() {
@@ -64,10 +63,6 @@ function LoginForm() {
                 dispatch(setLoginError(true));
             } else {
                 dispatch(setLoginPending(false));
-                dispatch({
-                    type: LOG_IN,
-                    login: false
-                });
                 dispatch({
                         type: SET_LOGIN_SUCCESS,
                         isLoginSuccess: true

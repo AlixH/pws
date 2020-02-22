@@ -3,10 +3,8 @@ import './style.css';
 import {useDispatch, useSelector} from "react-redux";
 import {SET_PLUGIN_LIST} from "../../store/actions/PluginList";
 import Plugin from "../Plugin/Plugin";
-import {Modal} from "@material-ui/core";
 import shallowEqual from "react-redux/lib/utils/shallowEqual";
 import NavBar from "../Navbar/Navbar";
-import {OPEN_PLUGIN_DETAILS} from "../../store/actions/OpenPluginDetails";
 import PluginModal from "../PluginModal/PluginModal";
 
 

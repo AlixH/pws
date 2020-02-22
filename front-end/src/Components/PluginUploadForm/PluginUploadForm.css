@@ -1,7 +1,17 @@
 .card{
+    height: 100%;
 }
 
+#wrapper{
+    height: 100%;
+}
 
+#plugin_upload_page{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+}
 
 .textField {
     width: 100%;
