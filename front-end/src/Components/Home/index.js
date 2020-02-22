@@ -33,7 +33,7 @@ function Home(properties) {
                 if (response && response.data && response.data.plugins) {
                     dispatch({
                         type: SET_PLUGIN_LIST,
-                        pluginsList: response.data.plugins
+                        pluginsList: response.data.plugins.sort((a,b) => new Date(b.updated_on) - new Date(a.updated_on))
                     });
                 }
             }
