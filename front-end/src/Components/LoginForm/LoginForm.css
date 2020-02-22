@@ -15,6 +15,15 @@ label {
     font-weight: bold;
 }
 
+#skip_login{
+    color: royalblue;
+    text-decoration: underline;
+    font-size: 15px;
+    margin-top: 2%;
+} #skip_login:hover{
+    cursor: pointer;
+ }
+
 
 .message {
     font-size: 25px;
@@ -24,7 +33,7 @@ label {
 
 .input {
     width: 80%;
-    margin-bottom:5%;
+    margin-top:5%;
     padding: 2%;
     size: 20px;
     padding:0;
@@ -45,6 +54,7 @@ label {
     justify-content: space-evenly;
     align-items: center;
     width: 80%;
+    margin-top: 5%;
 }
 
 
@@ -57,6 +67,7 @@ label {
     height: 100vh;
     background-color: #68585f ;
 }
+
 
 .card {
     width: 30%;

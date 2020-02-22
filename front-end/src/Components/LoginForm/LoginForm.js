@@ -9,12 +9,14 @@ import TextField from '@material-ui/core/TextField';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
+import {useHistory} from 'react-router-dom';
 
 function LoginForm() {
 
     const [email, setEmail] = useState("");
     const [password,setEPassword] = useState("");
     const dispatch = useDispatch();
+    const history = useHistory();
 
     function register() {
         console.log("Unavailable feature : Register new user ! It should arrive soon !")
@@ -102,6 +104,10 @@ function LoginForm() {
         });
     }
 
+    function skipLogin() {
+        history.push('/home')
+    }
+
     return (
         <div className="rootDiv">
             <Card raised={"true"} className={"card"} color="primary">
@@ -111,6 +117,7 @@ function LoginForm() {
                             <TextField
                                 className={"field"}
                                 required
+                                id={"email"}
                                 placeholder={"Mail"}
                                 type="email"
                                 defaultValue=""
@@ -149,7 +156,7 @@ function LoginForm() {
                                 </Button>
                             </div>
                         </div>
-
+                        <p onClick={() => skipLogin()} id={"skip_login"}>Continuer en tant que visiteur</p>
                     </form>
                 </CardContent>
             </Card>

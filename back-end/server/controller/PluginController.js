@@ -9,7 +9,7 @@ module.exports = {
                 console.log(err);
                 next(err);
             } else {
-                res.json({ status: "success", message: "Plugin found!!!", data: { plugins: pluginInfo } });
+                res.json({status: "success", message: "Plugin found!!!", data: {plugins: pluginInfo}});
             }
         });
     },
@@ -24,7 +24,7 @@ module.exports = {
                 for (let plugin of plugins) {
                     pluginsList.push(plugin);
                 }
-                res.json({ status: "success", message: "Plugin list found!!!", data: { plugins: pluginsList } });
+                res.json({status: "success", message: "Plugin list found!!!", data: {plugins: pluginsList}});
 
             }
         });
@@ -47,13 +47,14 @@ module.exports = {
             if (err)
                 next(err);
             else {
-                res.json({ status: "success", message: "Plugin deleted successfully!!!", data: null });
+                res.json({status: "success", message: "Plugin deleted successfully!!!", data: null});
             }
         });
     },
 
     create: function (req, res, next) {
         console.log("createPlugin");
+
 
         Plugin.create({
             name: req.body.name, description: req.body.description, version: req.body.version,
@@ -64,13 +65,13 @@ module.exports = {
             if (err)
                 next(err);
             else
-                res.json({ status: "success", message: "Plugin added successfully!!!", data: null });
+                res.json({status: "success", message: "Plugin added successfully!!!", data: null});
         });
     },
 
     /**
      * Add rating to one plugin's rating list
-    */
+     */
     rate: (req, res, next) => {
         console.log(">>> rate plugin <<<");
 
@@ -81,18 +82,22 @@ module.exports = {
          * Reminder:
          ** Plugin.findOne{filter} returns one single plugin that matches the filter
          ** Plugin.find{filter} returns a list containing one single plugin that matches the filter
-        */
-        Plugin.findOne({ _id: pluginId }, (err, plugin) => {
+         */
+        Plugin.findOne({_id: pluginId}, (err, plugin) => {
             if (err) {
                 next(err);
             } else {
                 let newRatings = plugin.ratings;
                 newRatings.push(note);
-                Plugin.updateOne({ _id: plugin._id }, { ratings: newRatings }, (error, p) => {
+                Plugin.updateOne({_id: plugin._id}, {ratings: newRatings}, (error, p) => {
                     if (error) {
                         next(error);
                     } else {
-                        res.json({ status: "Success", message: `Plugin ${plugin.name} has been rated ${note}`, data: null });
+                        res.json({
+                            status: "Success",
+                            message: `Plugin ${plugin.name} has been rated ${note}`,
+                            data: null
+                        });
                     }
                 });
             }
@@ -101,13 +106,13 @@ module.exports = {
 
     /**
      * Get plugin's score
-    */
+     */
     getScore: (req, res, next) => {
         console.log(">>> getScore <<<");
 
         let pluginId = req.body.pluginId;
 
-        Plugin.findOne({ _id: pluginId }, (err, plugin) => {
+        Plugin.findOne({_id: pluginId}, (err, plugin) => {
             if (err) {
                 next(err);
             } else {
@@ -117,34 +122,38 @@ module.exports = {
                 if (ratings.length > 0) {
                     /**
                      * Sum all the ratings into score
-                    */
+                     */
                     score = ratings.reduce((a, b) => a + b, 0) / ratings.length;
                 }
-                res.json({ status: "Success", data: { score: score } });
+                res.json({status: "Success", data: {score: score}});
             }
         });
     },
 
     /**
      * Get plugin's score
-    */
+     */
     comment: (req, res, next) => {
         console.log(">>> comment <<<");
 
         let pluginId = req.body.pluginId;
         let commentText = req.body.commentText;
 
-        Plugin.findOne({ _id: pluginId }, (err, plugin) => {
+        Plugin.findOne({_id: pluginId}, (err, plugin) => {
             if (err) {
                 next(err);
             } else {
                 let comments = plugin.comments;
                 comments.push(commentText);
-                Plugin.updateOne({ _id: plugin._id }, { comments: comments }, (error, p) => {
+                Plugin.updateOne({_id: plugin._id}, {comments: comments}, (error, p) => {
                     if (error) {
                         next(error);
                     } else {
-                        res.json({ status: "Success", message: `Comment ${commentText} has been added to plugin ${plugin.name}`, data: null });
+                        res.json({
+                            status: "Success",
+                            message: `Comment ${commentText} has been added to plugin ${plugin.name}`,
+                            data: null
+                        });
                     }
                 });
             }
@@ -153,13 +162,13 @@ module.exports = {
 
     /**
      * Get Zip File by pluginId
-    */
+     */
     getZipFile: (req, res, next) => {
         console.log(">>> commentgetZipFile <<<");
 
         let pluginId = req.query.pluginId;
 
-        Plugin.findOne({ _id: pluginId }, (err, plugin) => {
+        Plugin.findOne({_id: pluginId}, (err, plugin) => {
             if (err) {
                 next(err);
             } else {
@@ -176,7 +185,7 @@ module.exports = {
 
 /**
  * Echapper les caractères spéciaux HTML
-*/
+ */
 let escapeHtml = (unsafe) => {
     return unsafe
         .replace(/&/g, "&amp;")

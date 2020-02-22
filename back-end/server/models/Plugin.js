@@ -21,7 +21,6 @@ const pluginSchema = mongoose.Schema({
     author: {
         type: String,
         trim: true,
-        required: true,
     },
     updated_on: {
         type: Date,
@@ -39,7 +38,6 @@ const pluginSchema = mongoose.Schema({
     zip_url: {
         type: String,
         trim: true,
-        required: true
     },
     category: {
         type: String,

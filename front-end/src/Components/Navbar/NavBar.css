@@ -26,13 +26,13 @@
 
 
 #logout_button{
-    background-color: #F50057;
-    color: whitesmoke;
+    background-color: whitesmoke ;
 }
 
 #upload_button{
-    background-color: white;
+    background-color: #F50057;
     margin-right: 3%;
+    color: whitesmoke;
 }
 
 #buttons{
@@ -44,6 +44,7 @@
 }
 
 #login_button{
-    background-color: whitesmoke;
+    background-color: #F50057;
+    color: whitesmoke;
 }
 
