@@ -21,6 +21,8 @@ import Switch from "@material-ui/core/Switch";
 import Chip from "@material-ui/core/Chip";
 import {useDispatch} from "react-redux";
 import Typography from "@material-ui/core/Typography";
+import {useHistory} from "react-router-dom";
+
 
 function PluginUploadForm() {
 
@@ -39,7 +41,9 @@ function PluginUploadForm() {
     const [category, setCategory] = useState("");
     const [version, setVersion] = useState("");
     const [activeStep, setActiveStep] = useState(0);
-    let formValid = description !== "" && name !== "" && imageUrl !== "" && category !== "" && version !== "";
+    let formValid = description.trim() !== "" && name.trim() !== "" && imageUrl.trim() !== "" && category.trim() !== "" && version.trim() !== "";
+
+    const history = useHistory();
 
     console.log("################ ", zipFile);
 
@@ -135,7 +139,7 @@ function PluginUploadForm() {
                 "zip_url": "zip_url",
             })
         });
-        if(open_source) {
+        if (open_source) {
             response = await response.json();
             let pluginId = response.data.pluginId;
             /*
@@ -368,6 +372,14 @@ function PluginUploadForm() {
                                     disabled={(!formValid && activeStep === 0) || (activeStep === 1 && zipFile === null)}
                                     variant={"contained"}
                                     color={"primary"}>Soumettre</Button>
+                        </div>}
+                        {activeStep === steps.length - 1 &&
+                        <div><Button variant={"contained"} color={"secondary"} size={"large"}
+                                     onClick={() => setActiveStep(0)}>Publier un autre plugin</Button></div>
+                        }
+                        {activeStep === steps.length - 1 && <div>
+                            <Button variant={"contained"} size={"large"} color={"primary"}
+                                    onClick={() => history.push('/home')}>Retourner à l'accueil</Button>
                         </div>}
                     </div>
                 </CardContent>
