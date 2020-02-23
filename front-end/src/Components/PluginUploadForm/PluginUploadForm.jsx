@@ -277,9 +277,9 @@ function PluginUploadForm() {
                                        variant="outlined"
                             />
                         </div>
-                        <div className={"upload_input"}>
+                        <div id={"category_input"} >
                             <InputLabel>Catégorie*</InputLabel>
-                            <Select autoWidth={true} variant={"outlined"} id={"select"} value={category}
+                            <Select  variant={"outlined"} id={"select"} value={category}
                                     onChange={(e) => setCategory(e.target.value)}>
                                 <MenuItem value={"Modulation"}>Modulation</MenuItem>
                                 <MenuItem value={"Distorsion"}>Distorsion</MenuItem>
@@ -301,6 +301,7 @@ function PluginUploadForm() {
                                        id="outlined-required"
                                        value={description}
                                        name="tags"
+                                       rowsMax={10}
                                        label="Description"
                                        autoComplete={"off"}
                                        variant="outlined"
@@ -320,6 +321,7 @@ function PluginUploadForm() {
                                        id="outlined-required"
                                        name="tags"
                                        label="Tags"
+                                       autoComplete={"off"}
                                        variant="outlined"
                                        onKeyPress={(e) => handleKeyPress(e)}
                             />

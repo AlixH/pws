@@ -15,6 +15,15 @@
     flex-wrap: wrap;
 }
 
+#comment_input{
+    width: 80%;
+}
+
+#rating_input{
+    width: 80%;
+    margin-bottom: 4%;
+}
+
 #description{
     display: flex;
     flex-direction: column;
@@ -25,13 +34,23 @@
     margin-bottom: 3%;
 }
 
+#select{
+    width: 80%;
+}
+
 #test{
     text-align: center;
+}
+
+#user_feedback{
+    padding: 2%;
 }
 .card{
     width: 30%;
 
 }
+
+
 
 .card_title{
     font-family: Roboto;
