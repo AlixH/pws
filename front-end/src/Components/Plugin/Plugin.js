@@ -140,11 +140,11 @@ function Plugin(properties) {
                             </div>
                             <div className={"the_media"}>
                                 {!video ?
-                                    <img className={"image"}
-                                         src={"https://www.moddevices.com/hubfs/assets/images/images/gear-gallery/Leslie-600x450.png"}/>
+                                    <img alt={"Aucune image fournie"} className={"image"}
+                                         src={plugin.thumbnail_url}/>
                                     :
                                     <div className={"video"}>
-                                        <ReactPlayer width={"100%"} height={"300px"} url={plugin.video_url} controls/>
+                                        <ReactPlayer  width={"100%"} height={"300px"} url={plugin.video_url} controls/>
                                     </div>
                                 }
                             </div>
