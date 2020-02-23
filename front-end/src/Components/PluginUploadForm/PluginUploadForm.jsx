@@ -20,6 +20,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import Chip from "@material-ui/core/Chip";
 import {useDispatch} from "react-redux";
+import Typography from "@material-ui/core/Typography";
 
 function PluginUploadForm() {
 
@@ -134,15 +135,26 @@ function PluginUploadForm() {
                 "zip_url": "zip_url",
             })
         });
+        response =  await response.json();
+        let pluginId = response.data.pluginId;
+        /*
+         * Requete pour upload le zipFile
+        */
+        let upload_zipFile_Url = `http://localhost:4000/files/upload`;
+        const formData = new FormData();
+        const renamedZip = new File([zipFile], `${pluginId}.zip`, {type: zipFile.type});
+        formData.append('file1', renamedZip);
+        formData.append('pluginId', pluginId);
+        let request = new XMLHttpRequest();
+        request.open("POST", upload_zipFile_Url);
+        request.send(formData);
 
-        await response.json().then((data) => {
-            if (data.status === "error") {
-                console.log("data.status = error");
-                callback(true);
-            } else {
-                callback(false);
-            }
-        });
+        if (response.status === "error") {
+            console.log("data.status = error");
+            callback(true);
+        } else {
+            callback(false);
+        }
     };
 
 
@@ -198,7 +210,7 @@ function PluginUploadForm() {
         <div id={"plugin_upload_page"}>
             <NavBar/>
             <Card raised={"true"} id={"card"}>
-                <CardHeader title={"Upload Plugin"}>
+                <CardHeader id={"upload_title"} title={"Publier votre plugin"}>
                 </CardHeader>
                 <CardContent id={"upload_form_content"}>
                     <Stepper id={"stepper"} activeStep={activeStep} alternativeLabel>
@@ -306,6 +318,7 @@ function PluginUploadForm() {
                                        onKeyPress={(e) => handleKeyPress(e)}
                             />
                         </div>
+                        <Typography>Ecrivez, et appuyez sur "Entrée" pour ajouter un nouveau tag</Typography>
                     </div>)
                     }
                     {activeStep !== 0 && activeStep !== steps.length - 1 &&
@@ -331,7 +344,7 @@ function PluginUploadForm() {
                     {activeStep === steps.length - 1 &&
                     <div id={"validation"}>
                         <h1 style={{color: "green"}}>Félicitations : votre plugin a été ajouté au magasin!</h1>
-                        <CheckCircleIcon id="check_icon" />
+                        <CheckCircleIcon id="check_icon"/>
                     </div>
                     }
                     <div id={"bottom_buttons"}>
@@ -356,9 +369,9 @@ function PluginUploadForm() {
                         </div>}
                     </div>
                 </CardContent>
-                </Card>
+            </Card>
         </div>
-);
+    );
 }
 
 

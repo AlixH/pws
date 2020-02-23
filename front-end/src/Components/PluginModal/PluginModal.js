@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 import shallowEqual from "react-redux/lib/utils/shallowEqual";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
+import {Rating} from "@material-ui/lab";
+import Box from "@material-ui/core/Box";
 
 
 function PluginModal() {
@@ -60,6 +62,7 @@ function PluginModal() {
                             <CardContent>
                                 <div id={"test"}>
                                     <h1 className={"card_title"}>Votre avis</h1>
+                                    <Rating size={"large"} name="read-only"  precision={1}/>
                                 </div>
                             </CardContent>
                         </Card>

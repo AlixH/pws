@@ -47,7 +47,7 @@ function NavBar(properties) {
             {isLoggedIn ?
                 <div id={"buttons"}>
                     {history.location.pathname === '/home' ?
-                        <Button id={"upload_button"} size={"large"} onClick={() => openUploadForm()}>Upload un plugin</Button>
+                        <Button id={"upload_button"} size={"large"} onClick={() => openUploadForm()}>Publier un plugin</Button>
                         : null
                     }
                     <Button id={"logout_button"} size={"large"} onClick={() => logOut()}>Déconnexion</Button>

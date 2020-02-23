@@ -65,7 +65,8 @@ module.exports = {
             if (err)
                 next(err);
             else
-                res.json({status: "success", message: "Plugin added successfully!!!", data: null});
+                console.log(result);
+                res.json({status: "success", message: "Plugin added successfully!!!", data: {pluginId : result._id}});
         });
     },
 

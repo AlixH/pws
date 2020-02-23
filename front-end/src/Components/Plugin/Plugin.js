@@ -19,6 +19,7 @@ import CodeIcon from '@material-ui/icons/Code';
 import {Tooltip} from "@material-ui/core";
 import {useDispatch} from "react-redux";
 import {OPEN_PLUGIN_DETAILS} from "../../store/actions/OpenPluginDetails";
+import {SET_PLUGIN_LIST} from "../../store/actions/PluginList";
 
 function Plugin(properties) {
     const plugin = properties.plugin;
@@ -33,7 +34,7 @@ function Plugin(properties) {
         },
         preventOverflow: {
             enabled: true,
-                boundariesElement: 'scrollParent',
+            boundariesElement: 'scrollParent',
         },
 
     };
@@ -65,6 +66,7 @@ function Plugin(properties) {
         date = new Date(date.toString());
         return ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
     }
+
     function changeMedia() {
         setVideo(!video)
     }
@@ -78,9 +80,28 @@ function Plugin(properties) {
     function openModal() {
         console.log(properties)
         dispatch({
-            type:OPEN_PLUGIN_DETAILS,
-            plugin:properties.index
+            type: OPEN_PLUGIN_DETAILS,
+            plugin: properties.index
         })
+    }
+
+    async function forkCode() {
+        let url = `http://localhost:4000/plugins/get-zip-file?pluginId=${plugin._id}`;
+        try {
+            const response = await fetch(url);
+            if (!response || response.status !== 200) {
+                alert("Aucun fichier trouvé pour ce plugin!")
+            } else {
+                const link = document.createElement('a');
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        } catch (e) {
+            console.error(e);
+            alert("Aucun fichier trouvé pour ce plugin!")
+        }
     }
 
     return (
@@ -90,14 +111,15 @@ function Plugin(properties) {
                 <div className={show ? "plugin-expanded" : "plugin-toggled"} id={"plugin"}>
                     <div className={"plugin-preview"}>
                         <div className={"top"}>
-                            <Tooltip  title={<span id={"tooltip"}>Télécharger le code source</span>}>
-                                <div className={open_source ? "button_hover fork-show" : "button_hover fork-hide"}>
+                            <Tooltip title={<span id={"tooltip"}>Télécharger le code source</span>}>
+                                <div onClick={() => forkCode()}
+                                     className={open_source ? "button_hover fork-show" : "button_hover fork-hide"}>
                                     <Avatar>
                                         <CodeIcon fontSize={"large"}/>
                                     </Avatar>
                                 </div>
                             </Tooltip>
-                            <h1 id={"title"} onClick={() => openModal()} >{plugin.name}</h1>
+                            <h1 id={"title"} onClick={() => openModal()}>{plugin.name}</h1>
                             <div className={"version_date"}>
                                 <p className={"version"}>v{plugin.version}</p>
                                 <p className={"date"}>{date}</p>
@@ -154,8 +176,9 @@ function Plugin(properties) {
                         </div>
                     </div>
                     {show ?
-                        <Popper  placement={"left-end"} open={show} modifiers={comments_modifier} anchorEl={anchorEl} transition>
-                            <Card >
+                        <Popper placement={"left-end"} open={show} modifiers={comments_modifier} anchorEl={anchorEl}
+                                transition>
+                            <Card>
                                 <div className={"comments_section"}>{comments}</div>
                             </Card>
                         </Popper>

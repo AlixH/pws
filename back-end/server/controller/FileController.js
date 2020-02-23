@@ -64,9 +64,10 @@ module.exports.uploadFile = async (req, res) => {
             console.log(err);
             return res.status(500).send({title: 'Uploaded Error', message: 'File could not be uploaded', error: err});
         }
-    
+
+        const pluginId = req.body.pluginId[0];
         // the zip file's source and unzipped file's destination
-        let source = `./uploads/${req.file.filename}`; 
+        let source = `./uploads/${pluginId}`;
         let destination = `${__dirname}/../../uploads/`;
 
         // unzip
@@ -74,7 +75,7 @@ module.exports.uploadFile = async (req, res) => {
             console.log("file has been unziped !");
         });
 
-        res.status(200).send({title: 'Uploaded', message: `File ${req.file.filename} has been uploaded!`});
+        res.status(200).send({title: 'Uploaded', message: `File ${pluginId} has been uploaded!`});
     });
 
 
