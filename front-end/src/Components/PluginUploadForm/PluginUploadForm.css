@@ -27,8 +27,14 @@
     justify-content: center;
 }
 
+#congrats{
+    color: lightgreen;
+    font-size: 20px;
+}
+
 #check_icon{
-    font-size: 100px;
+    font-size: 50px;
+    color: lightgreen;
 }
 
 #upload_title{

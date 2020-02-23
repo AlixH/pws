@@ -135,25 +135,27 @@ function PluginUploadForm() {
                 "zip_url": "zip_url",
             })
         });
-        response =  await response.json();
-        let pluginId = response.data.pluginId;
-        /*
-         * Requete pour upload le zipFile
-        */
-        let upload_zipFile_Url = `http://localhost:4000/files/upload`;
-        const formData = new FormData();
-        const renamedZip = new File([zipFile], `${pluginId}.zip`, {type: zipFile.type});
-        formData.append('file1', renamedZip);
-        formData.append('pluginId', pluginId);
-        let request = new XMLHttpRequest();
-        request.open("POST", upload_zipFile_Url);
-        request.send(formData);
+        if(open_source) {
+            response = await response.json();
+            let pluginId = response.data.pluginId;
+            /*
+             * Requete pour upload le zipFile
+            */
+            let upload_zipFile_Url = `http://localhost:4000/files/upload`;
+            const formData = new FormData();
+            const renamedZip = new File([zipFile], `${pluginId}.zip`, {type: zipFile.type});
+            formData.append('file1', renamedZip);
+            formData.append('pluginId', pluginId);
+            let request = new XMLHttpRequest();
+            request.open("POST", upload_zipFile_Url);
+            request.send(formData);
 
-        if (response.status === "error") {
-            console.log("data.status = error");
-            callback(true);
-        } else {
-            callback(false);
+            if (response.status === "error") {
+                console.log("data.status = error");
+                callback(true);
+            } else {
+                callback(false);
+            }
         }
     };
 
@@ -210,7 +212,7 @@ function PluginUploadForm() {
         <div id={"plugin_upload_page"}>
             <NavBar/>
             <Card raised={"true"} id={"card"}>
-                <CardHeader id={"upload_title"} title={"Publier votre plugin"}>
+                <CardHeader id={"upload_title"} title={"Publiez votre plugin"}>
                 </CardHeader>
                 <CardContent id={"upload_form_content"}>
                     <Stepper id={"stepper"} activeStep={activeStep} alternativeLabel>
@@ -343,7 +345,7 @@ function PluginUploadForm() {
                     }
                     {activeStep === steps.length - 1 &&
                     <div id={"validation"}>
-                        <h1 style={{color: "green"}}>Félicitations : votre plugin a été ajouté au magasin!</h1>
+                        <p id={"congrats"}>Félicitations : votre plugin a été ajouté au magasin!</p>
                         <CheckCircleIcon id="check_icon"/>
                     </div>
                     }
