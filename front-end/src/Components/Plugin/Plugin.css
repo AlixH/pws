@@ -117,10 +117,16 @@ img{
 .version_date{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:flex-end;
     justify-content: flex-end;
     width: 33%;
     color: black;
+}
+
+#version_date_inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .MuiChip-label{

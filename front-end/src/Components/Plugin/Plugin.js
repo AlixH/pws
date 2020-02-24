@@ -121,8 +121,10 @@ function Plugin(properties) {
                             </Tooltip>
                             <h1 id={"title"} onClick={() => openModal()}>{plugin.name}</h1>
                             <div className={"version_date"}>
+                            <div id={"version_date_inner"}>
                                 <p className={"version"}>v{plugin.version}</p>
                                 <p className={"date"}>{date}</p>
+                            </div>
                             </div>
 
                         </div>
