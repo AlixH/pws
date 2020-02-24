@@ -24,6 +24,8 @@ module.exports = {
                 for (let plugin of plugins) {
                     pluginsList.push(plugin);
                 }
+
+                console.log({plugins: pluginsList});
                 res.json({status: "success", message: "Plugin list found!!!", data: {plugins: pluginsList}});
 
             }
@@ -124,12 +126,19 @@ module.exports = {
                     /**
                      * Sum all the ratings into score
                      */
-                    score = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+                    //score = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+                    score = computeScore(ratings);
                 }
                 res.json({status: "Success", data: {score: score}});
             }
         });
     },
+
+    computeScore : (listNotes) => {
+        let result = listNotes.reduce((a, b) => a + b, 0) / listNotes.length;   
+        return result;
+    },
+
 
     /**
      * Get plugin's score
@@ -183,6 +192,8 @@ module.exports = {
         });
     },
 };
+
+
 
 /**
  * Echapper les caractères spéciaux HTML
