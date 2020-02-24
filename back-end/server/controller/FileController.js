@@ -10,6 +10,8 @@ const fs = require("fs");
 
 const extract = require('extract-zip');
 
+const { exec } = require("child_process");
+
 let storage = new GridFsStorage({
     url:  config.DbConfig.DBURL,
     file: (req, file) => {
@@ -35,6 +37,21 @@ let localDestination = multer({storage: localStorage});
 
 
 const unzipFile = (source, destination, next) => {
+
+    
+
+    exec("ls -la", (error, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+    });
+
     console.log(`gonna unzip ${source} in ${destination}`);
     extract(source, {dir: destination},function (err) {
        console.log(`__error : ${err}`);
@@ -67,8 +84,8 @@ module.exports.uploadFile = async (req, res) => {
 
         const pluginId = req.body.pluginId[0];
         // the zip file's source and unzipped file's destination
-        let source = `./uploads/${pluginId}`;
-        let destination = `${__dirname}/../../uploads/`;
+        let source = `./uploads/${pluginId}.zip`;
+        let destination = `${__dirname}/../../uploads/${pluginId}`;
 
         // unzip
         let fileUnziped =  unzipFile(source, destination, () => {
