@@ -10,8 +10,6 @@ const fs = require("fs");
 
 const extract = require('extract-zip');
 
-const { exec } = require("child_process");
-
 let storage = new GridFsStorage({
     url:  config.DbConfig.DBURL,
     file: (req, file) => {
@@ -38,23 +36,11 @@ let localDestination = multer({storage: localStorage});
 
 const unzipFile = (source, destination, next) => {
 
-    
-
-    exec("ls -la", (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-    });
-
-    console.log(`gonna unzip ${source} in ${destination}`);
+    console.log(`Will unzip ${source} in ${destination}`);
     extract(source, {dir: destination},function (err) {
-       console.log(`__error : ${err}`);
+        if (err != undefined) {
+            console.log(`__error in unzipFile: ${err}`);
+        }
    });
 
     next();
