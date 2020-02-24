@@ -120,22 +120,20 @@ module.exports = {
                 next(err);
             } else {
                 let ratings = plugin.ratings;
-                let score = 0;
-
-                if (ratings.length > 0) {
-                    /**
-                     * Sum all the ratings into score
-                     */
-                    //score = ratings.reduce((a, b) => a + b, 0) / ratings.length;
-                    score = computeScore(ratings);
-                }
+                let score = score = computeScore(ratings);
                 res.json({status: "Success", data: {score: score}});
             }
         });
     },
 
     computeScore : (listNotes) => {
-        let result = listNotes.reduce((a, b) => a + b, 0) / listNotes.length;   
+        let result = 0;
+        if(listNotes.length > 0){
+            /**
+             * Sum all the ratings into score
+             **/
+            result = listNotes.reduce((a, b) => a + b, 0) / listNotes.length;
+        }
         return result;
     },
 
