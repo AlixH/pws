@@ -69,9 +69,9 @@ _**Note:** You may need to run with the root permission if Docker is installed v
 
 
 These command runs the following services using docker-compose.yml   
-services will run on : 
+services will run on :  
 frontend: http://localhost:5000/home  
-backend: http://localhost:4000
+backend: http://localhost:4000  
 
 
 ###### back:
