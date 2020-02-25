@@ -318,7 +318,6 @@ function PluginUploadForm() {
                         </div>
                         <div id={"tags_input"}>
                             <TextField className={"textField"} margin={"normal"}
-                                       required
                                        id="outlined-required"
                                        name="tags"
                                        label="Tags"
@@ -352,7 +351,7 @@ function PluginUploadForm() {
                     }
                     {activeStep === steps.length - 1 &&
                     <div id={"validation"}>
-                        <p id={"congrats"}>Félicitations : votre plugin a été ajouté au magasin!</p>
+                        <p id={"congrats"}>Félicitations : votre plugin a été ajouté!</p>
                         <CheckCircleIcon id="check_icon"/>
                     </div>
                     }

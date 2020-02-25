@@ -1,5 +1,5 @@
 // eslint-disable-file no-unused-vars
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Popper from '@material-ui/core/Popper';
 import "./Plugin.css";
@@ -23,6 +23,7 @@ import {OPEN_PLUGIN_DETAILS} from "../../store/actions/OpenPluginDetails";
 function Plugin(properties) {
     const plugin = properties.plugin;
     let tags = plugin.tags.slice(0, 5);
+    const [interupteur, setInterupteur] = useState(properties.interupteur);
     const dispatch = useDispatch();
     const open_source = plugin.opensource;
     const [anchorEl, setAnchorEl] = useState(null);
@@ -39,8 +40,10 @@ function Plugin(properties) {
 
     };
 
+    useEffect(() => { setInterupteur(!interupteur) }, []);
+
     const comments = plugin.comments.filter(c => c!=="" && c !== null).map(comment => {
-        return <p>{comment}</p>
+        return <p style={{backgroundColor:"whitesmoke", width:"100%", textAlign:"center", borderRadius:"10px"}}>{comment}</p>
     })
     const comments_count = comments.length;
     const comments_icon_tooltip = "Voir les commentaires";
@@ -164,6 +167,7 @@ function Plugin(properties) {
                                 <Box component="fieldset" mb={3} borderColor="transparent">
                                     <Rating size={"large"} name="read-only" value={score} readOnly precision={0.5}/>
                                 </Box>
+                                {modalOpened === null &&
                                 <Tooltip title={<span id={"tooltip"}>{comments_icon_tooltip}</span>}>
                                     <div onClick={comments_section}
                                          className={comments_count > 0 ? "button_hover comments_logo_wrapper" : "button_hover comments_logo_wrapper_hidden"}>
@@ -172,6 +176,7 @@ function Plugin(properties) {
                                         </Badge>
                                     </div>
                                 </Tooltip>
+                                }
                             </div>
                         </div>
                     </div>

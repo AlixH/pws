@@ -27,6 +27,7 @@ function PluginModal() {
     const plugin = pluginsList[openPlugin];
     const [rating, setRating] = useState(null);
     const rating_ref = useRef(null);
+    const[interupteur,setInterupteur] = useState(false);
 
 
     function closeModal() {
@@ -52,6 +53,7 @@ function PluginModal() {
                 })
             });
             setOpenRatingSet(true);
+            setInterupteur(!interupteur);
         }
     }
 
@@ -102,7 +104,7 @@ function PluginModal() {
             open={openPlugin != null}
         >
             <div id={"modal"}>
-                <Plugin plugin={plugin}/>
+                <Plugin key={interupteur} refresh={interupteur}  plugin={plugin}/>
                 <div className={"card"}>
                     <Card raised={true}>
                         <CardContent>
@@ -169,6 +171,16 @@ function PluginModal() {
                                         </Snackbar>
                                     </div>
                                 </div>
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardContent>
+                                <div id={"test_zone"}>
+                                    <div id={"test"}>
+                                        <h1 className={"card_title"}>Tester l'effet audio du plugin</h1>
+                                    </div>
+                                </div>
+
                             </CardContent>
                         </Card>
                     </div>
