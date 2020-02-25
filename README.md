@@ -101,7 +101,7 @@ When running the app, the home page is opened. It lists all plugins that have be
 In order to display a plugin details, you need to click in its name. A window is opened displaying the same component we can see in the picture above, with its description. To close the window, click on "Escape" button or on the plugin name, or even outside the window.
 
 
-## Login, plugin upload, rates and comments
+## Login, plugin upload, ratings and comments
 It is possible to login the app. To do so, click on "CONNEXION" button in top right of the navigation bar. Write you logins :  :email: email= soufiane@aouri.com and :passport_control:
  password= 000000 then click on "CONNEXION" button. Otherwise, you can also use the app without login. To do so, click on "Continuer en tant que visiteur". This will reduce features you can use in the app !
 Once you're logged in, you have access to more features. When you come back to the home page, you can add a comment or rate a plugin by going on its details panel like described above.  
