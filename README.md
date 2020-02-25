@@ -1,4 +1,14 @@
-### Node JS and React JS Project With Docker Compose File
+# Prog Web - Client & Server side : Development of a collaborative platform for exchanging audio plugins
+
+## Students  
+- Aourinmouche Chihabeddine                                    
+- Aourinmouche Soufiane
+- Humbert Alix
+- Larabi Walid
+
+## Features  
+
+## Run the project
 
 ##### Pre-Requisite
 - Install Docker with docker-compose version >= 3.2 (Recommended version 3.2)
