@@ -2,8 +2,8 @@
 
 In this document, you will find:  
 - Student names 
-- Features of our project
 - How to run the projet 
+- How to used implemented features 
 
 
 
@@ -13,10 +13,6 @@ In this document, you will find:
 - Aourinmouche Soufiane  :smiling_imp:
 - Humbert Alix :satisfied:
 - Larabi Walid :sunglasses:
-
-## Features  
-
-
 
 ## Run the project
 
