@@ -9,10 +9,10 @@ In this document, you will find:
 
 
 ## Students  
-- Aourinmouche Chihabeddine                                    
-- Aourinmouche Soufiane
-- Humbert Alix
-- Larabi Walid
+- Aourinmouche Chihabeddine :innocent:                                
+- Aourinmouche Soufiane  :smiling_imp:
+- Humbert Alix :satisfied:
+- Larabi Walid :sunglasses:
 
 ## Features  
 
@@ -59,7 +59,7 @@ To run the front, in a new terminal window :
 it will run on : localhost:3000
 
 
-## Run with Docker
+## Run with Docker :whale:
 
 If you have Docker installed, please do the following steps :
 
@@ -105,6 +105,6 @@ Once you're logged in, you have access to more features. When you come back to t
 In order to upload a new plugin, there is a dedicated button "Publier un plugin" in the navigation bar. You have access to it only if you're logged in ! Clicking on it will redirect you to Upload page. The upload can be made in 2 or 3 steps :
 --> First step : Fill the form with name, version, URL video, URL image ... All fields are required except Tags. 
 You can add up to 5 tag at maximum. To add a tag, type it "tag1 bla bla.." then press OK, this will add "tag1 bla bla.." in the list, then you can do the same to add a second one ... The submit button is disabled till the required fields are filled. Required fields are marked with (*).  
-When you toggle on "open source" button, the second step "Upload zip" is enabled and a button "submit" become "next". Click on "Charger l'archive du plugin" and choose plugin zip then click "submit". A confirmation message appears. Returning to the home page, you can see you're new uploaded plugin in the top of the list as they are sorted by upload date (this choice has been taked for demonstration purpose, thus we can see easily the uploaded plugin without looking for it ampng the list items) ! Congrats.
+When you toggle on "open source" button, the second step "Upload zip" is enabled and a button "submit" become "next". Click on "Charger l'archive du plugin" and choose plugin zip then click "submit". A confirmation message appears. Returning to the home page, you can see you're new uploaded plugin in the top of the list as they are sorted by upload date (this choice has been taked for demonstration purpose, thus we can see easily the uploaded plugin without looking for it ampng the list items) ! Congrats. :clap:
 
 
