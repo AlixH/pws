@@ -38,10 +38,6 @@ ports:
 front service will run and create container called `demo-front-end`. It needs `back` services to intract with the database that is why it will run after `back` service image.
 
 ##### How to set Envrionment Variable:
-**_Steps to set Custom mongodb connection string:_**
-Set environment variable `DB_CON_STR` for MongoDB custom path
-Cammand: export `DB_CON_STR=<DB-PATH>` (Connection string to connect with db)
-To check/verify your environment variable `DB_CON_STR` value, use command: `echo ${DB_CONNECTION_STRING}`
 
 **_Steps to set Custom JWT secret key:_**
 Set environment variable `JWT_SECRET` for JWT token
@@ -54,7 +50,7 @@ Cammand: export `SERVER_PORT=<SERVER-PORT>` (`SERVER_PORT` for server)
 To check/verify your environment variable `SERVER_PORT` value, use command: `echo ${SERVER_PORT}`
 
 
-**Configurations for demo-front-end**
+**Configurations for front-end**
 _**Note:** You need to open port 5000 from the server configurations to make it avaiable for users to use the `demo-front-end`. If you want to change/customize the port you can change the outisde port from the `front service` of `docker-compose.yml` file. Like if you want to configure `port 5001` the you need to replace the following lines:_
 
 ports:
@@ -65,14 +61,3 @@ with the following lines:
 ports:
 
     - '5001:5000'
-
-Right now we are using default port of Back-End service as 4000. But in case if you will change/customize the port from the docker-compose.yml then you need to change that port in this constants file of front-end. (We have created the constants file to configure host and port). To change this, follow these steps:
-
-**_Goto the path: `front-end/src/Constants/ElmLoader_**
-If you have changed the port in docker-compose.yml (i.e. changed the port otherthan 4000 for back) then you need to set the configured port to the parameter port like if you have configured `4001` then you need to write: `port:"4001"`.
-
-There is another parameter host is exposed. But we don't have to do anything untill we'll host our Back-End code separately on other server or domain from the `demo-front-end` code.
-
-**This is all we need to deploy this demo `node-reactjs-docker` application.**
-_If anyone wants any further instruction can contact me through email._
-**_Thank you_**
