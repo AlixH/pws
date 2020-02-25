@@ -84,6 +84,8 @@ ports:
 ##### front:
 front service will run and create container called `demo-front-end`. It needs `back` services to intract with the database that is why it will run after `back` service image.
 
+https://user-images.githubusercontent.com/19587815/75289890-8f527e00-581f-11ea-9ada-2db1388707b6.png
+
 ## Galerie 
 When running the app, the home page is opened. It lists all plugins that have been published and stored in our MongoDB database. Information about each plugin is represented in a card. We can find information below : 
 
