@@ -8,6 +8,8 @@
 
 ## Features  
 
+
+
 ## Run the project
 
 ##### Pre-Requisite
@@ -47,27 +49,3 @@ ports:
 ##### front:
 front service will run and create container called `demo-front-end`. It needs `back` services to intract with the database that is why it will run after `back` service image.
 
-##### How to set Envrionment Variable:
-
-**_Steps to set Custom JWT secret key:_**
-Set environment variable `JWT_SECRET` for JWT token
-Cammand: export `JWT_SECRET=<JWT-SECRET>` (`JWT_SECRET` for JWT Token)
-To check/verify your environment variable `JWT_SECRET` value, use command: `echo ${JWT_SECRET}`
-
-**_Steps to set Custom server PORT:_**
-Set environment variable `SERVER_PORT` for server
-Cammand: export `SERVER_PORT=<SERVER-PORT>` (`SERVER_PORT` for server)
-To check/verify your environment variable `SERVER_PORT` value, use command: `echo ${SERVER_PORT}`
-
-
-**Configurations for front-end**
-_**Note:** You need to open port 5000 from the server configurations to make it avaiable for users to use the `demo-front-end`. If you want to change/customize the port you can change the outisde port from the `front service` of `docker-compose.yml` file. Like if you want to configure `port 5001` the you need to replace the following lines:_
-
-ports:
-
-    - '5000:5000'
-with the following lines:
-
-ports:
-
-    - '5001:5000'
