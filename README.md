@@ -2,7 +2,7 @@
 
 In this document, you will find:  
 - Student names 
-- How to run the projet 
+- How to run the projet and tests
 - How to use implemented features 
 
 
@@ -112,3 +112,14 @@ You can add up to 5 tag at maximum. To add a tag, type it "tag1 bla bla.." then 
 When you toggle on "open source" button, the second step "Upload zip" is enabled and a button "submit" become "next". Click on "Charger l'archive du plugin" and choose plugin zip then click "submit". A confirmation message appears. Returning to the home page, you can see you're new uploaded plugin in the top of the list as they are sorted by upload date (this choice has been taked for demonstration purpose, thus we can see easily the uploaded plugin without looking for it ampng the list items) ! Congrats. :clap:
 
 
+## run tests
+
+to run tests, please do following command :
+
+```npm test ```
+
+if somme dependencies are missing, please install them with following commands :
+
+```npm install --save chai ```
+
+```npm install --save supertest ```
