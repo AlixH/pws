@@ -59,13 +59,20 @@ it will run on : localhost:3000
 
 If you have Docker installed, please do the following steps :
 
+
 ##### Steps
 In the root directory of this code, use the following commands:
 `docker-compose build`  - _to build the project_
-`docker-compose up` - _to run the project_
+`docker-compose up` - _to run the project_  
+
 _**Note:** You may need to run with the root permission if Docker is installed via root user. like: `sudo docker-compose up`_
 
-These command runs the following services using docker-compose.yml
+
+These command runs the following services using docker-compose.yml   
+services will run on : 
+frontend: http://localhost:5000/home  
+backend: http://localhost:4000
+
 
 ###### back:
 back service will run and create container called `demo-back-end`.
