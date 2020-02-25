@@ -1,4 +1,4 @@
-# Prog Web - Client & Server side : Development of a collaborative platform for exchanging audio plugins  
+# Prog Web - Client & Server side : Development of a collaborative platform for exchanging audio plugins  :musical_note:  :notes: :heart:
 
 In this document, you will find:  
 - Student names 
