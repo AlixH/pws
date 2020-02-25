@@ -61,8 +61,8 @@ If you have Docker installed, please do the following steps :
 
 
 ##### Steps
-In the root directory of this code, use the following commands:
-`docker-compose build`  - _to build the project_
+In the root directory of this code, use the following commands:  
+`docker-compose build`  - _to build the project_  
 `docker-compose up` - _to run the project_  
 
 _**Note:** You may need to run with the root permission if Docker is installed via root user. like: `sudo docker-compose up`_
