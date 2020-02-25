@@ -17,6 +17,9 @@ const swaggerDoc = require('../swagger');//v1 api routes
 /**creating express server app for server */
 const app         = EXPRESS();
 
+/*serving the content of uploads directory*/
+app.use(EXPRESS.static(__dirname + '/../uploads'));
+
 /********************************
  ***** Server Configuration *****
  ********************************/

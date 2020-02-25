@@ -4,18 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "swagger": "js-yaml ./api/swagger/swagger.yaml > swagger.json",
     "start": "npm run swagger && node server.js",
     "local": "node server.js",
     "localPm2": "pm2 start server.js",
     "provision": "node ./bin/provision",
-    "swagger:edit": "swagger project edit"
+    "swagger:edit": "swagger project edit",
+    "test": "mocha --recursive"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "async": "^3.1.0",
+    "axios": "^0.19.2",
     "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -33,6 +34,7 @@
     "multer-gridfs-storage": "^4.0.2",
     "mysql": "^2.17.1",
     "mysql2": "^2.1.0",
+    "nock": "^12.0.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "path": "^0.12.7",
@@ -44,7 +46,8 @@
     "swagger-node-express": "^2.1.3",
     "swagger-ui-express": "^4.1.3",
     "swig": "^1.4.2",
-    "sync": "^0.2.5"
+    "sync": "^0.2.5",
+    "ts-mockito": "^2.5.0"
   },
   "devDependencies": {
     "child_process": "^1.0.2"
