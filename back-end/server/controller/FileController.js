@@ -71,7 +71,7 @@ module.exports.uploadFile = async (req, res) => {
         const pluginId = req.body.pluginId[0];
         // the zip file's source and unzipped file's destination
         let source = `./uploads/${pluginId}.zip`;
-        let destination = `${__dirname}/../../uploads/${pluginId}`;
+        let destination = `${__dirname}/../../uploads/`;
 
         // unzip
         let fileUnziped =  unzipFile(source, destination, () => {

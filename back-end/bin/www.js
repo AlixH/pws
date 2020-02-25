@@ -25,9 +25,11 @@ const app         = EXPRESS();
     app.use(EXPRESS.static("client"));
     app.use(BODY_PARSER.json({limit: '50mb'}));
     app.use(BODY_PARSER.urlencoded({ limit: '50mb', extended: true }));
+    app.use( EXPRESS.static(__dirname + '/../uploads'));
 
 
-    /** middleware for api's logging with deployment mode */
+
+/** middleware for api's logging with deployment mode */
     let apiLooger = (req, res, next)=>{
             ALLFILES.COMMONSERVICE.messageLogs(null, `api hitted ${req.url} ${ process.env.NODE_ENV}`);
             next();

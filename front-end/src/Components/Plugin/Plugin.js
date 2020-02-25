@@ -17,9 +17,8 @@ import ModeCommentIcon from '@material-ui/icons/ModeComment';
 import Badge from "@material-ui/core/Badge";
 import CodeIcon from '@material-ui/icons/Code';
 import {Tooltip} from "@material-ui/core";
-import {useDispatch} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {OPEN_PLUGIN_DETAILS} from "../../store/actions/OpenPluginDetails";
-import {SET_PLUGIN_LIST} from "../../store/actions/PluginList";
 
 function Plugin(properties) {
     const plugin = properties.plugin;
@@ -28,6 +27,7 @@ function Plugin(properties) {
     const open_source = plugin.opensource;
     const [anchorEl, setAnchorEl] = useState(null);
     const ratings = plugin.ratings;
+    const modalOpened = useSelector(state => state.openPluginReducer.plugin, shallowEqual);
     const comments_modifier = {
         flip: {
             enabled: true,
@@ -39,10 +39,10 @@ function Plugin(properties) {
 
     };
 
-    const comments = plugin.comments.map(comment => {
+    const comments = plugin.comments.filter(c => c!=="" && c !== null).map(comment => {
         return <p>{comment}</p>
     })
-    const comments_count = plugin.comments.length;
+    const comments_count = comments.length;
     const comments_icon_tooltip = "Voir les commentaires";
     let score;
     if (comments_count > 0) {
@@ -119,7 +119,7 @@ function Plugin(properties) {
                                     </Avatar>
                                 </div>
                             </Tooltip>
-                            <h1 id={"title"} onClick={() => openModal()}>{plugin.name}</h1>
+                            <div title={plugin.name} id={"title"} onClick={() => openModal()}>{plugin.name}</div>
                             <div className={"version_date"}>
                             <div id={"version_date_inner"}>
                                 <p className={"version"}>v{plugin.version}</p>
@@ -135,19 +135,17 @@ function Plugin(properties) {
                                      onClick={() => changeMedia()}>
                                     <ImageIcon className={"button_hover"} fontSize={"large"}/>
                                 </div>
-                                <div title={"Vidéo"} className={!video ? "media_show" : "media_toggled"}
+                                <div title={"Vidéo"} className={!video && plugin.video_url.trim() !== "" ? "video_show" : "video_toggled"}
                                      onClick={() => changeMedia()}>
                                     <YouTubeIcon className={"button_hover"} fontSize={"large"}/>
                                 </div>
                             </div>
                             <div className={"the_media"}>
                                 {!video ?
-                                    <img alt={"Aucune image fournie"} className={"image"}
+                                    <img alt={"Aucune image n'a été fournie ou trouvée pour ce plugin"} className={"image"}
                                          src={plugin.thumbnail_url}/>
                                     :
-                                    <div className={"video"}>
-                                        <ReactPlayer  width={"100%"} height={"300px"} url={plugin.video_url} controls/>
-                                    </div>
+                                    <ReactPlayer height={"300px"}   url={plugin.video_url} controls/>
                                 }
                             </div>
                         </div>
@@ -164,7 +162,7 @@ function Plugin(properties) {
                             </div>
                             <div className={"rating_comment"}>
                                 <Box component="fieldset" mb={3} borderColor="transparent">
-                                    <Rating size={"large"} name="read-only" value={score} readOnly precision={1}/>
+                                    <Rating size={"large"} name="read-only" value={score} readOnly precision={0.5}/>
                                 </Box>
                                 <Tooltip title={<span id={"tooltip"}>{comments_icon_tooltip}</span>}>
                                     <div onClick={comments_section}

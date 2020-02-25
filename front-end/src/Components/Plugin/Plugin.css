@@ -91,6 +91,14 @@ img{
     padding-right: 2%;
 }
 
+#video_toggled{
+    display: inherit;
+}
+
+#video_show{
+    display: none;
+}
+
 
 
 
@@ -182,12 +190,15 @@ img{
 
 
 #title{
-    color: royalblue;
-    font-family: "Calibri Light";
+    color: dodgerblue;
+    font-family: "Rubik";
     margin: 0;
     width: 33%;
     overflow: hidden;
+    text-overflow: ellipsis;
     text-align: center;
+    font-size: 30px;
+    white-space: nowrap;
 }
 
 #title:hover{
@@ -201,15 +212,19 @@ img{
 }
 
 .the_media{
-    width: 100%;
     height: 300px;
     margin: 0;
+    width: 100%;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
 .video{
-    display: block;
+    max-width: 100%;
+    height: 100%;
 }
 
 .media{
@@ -233,11 +248,11 @@ img{
 }
 
 .media_show{
-    display: block;
+    visibility: inherit;
 }
 
 .media_toggled{
-    display: none;
+    visibility: hidden;
 }
 
 .card{

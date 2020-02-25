@@ -126,7 +126,7 @@ function PluginUploadForm() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "name": name,
+                "name": name.replace(' ', "_"),
                 "author": "",
                 "description": description,
                 "video_url": video_url,
@@ -301,6 +301,7 @@ function PluginUploadForm() {
                                        id="outlined-required"
                                        value={description}
                                        name="tags"
+                                       rows={10}
                                        rowsMax={10}
                                        label="Description"
                                        autoComplete={"off"}
