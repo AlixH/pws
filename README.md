@@ -99,7 +99,8 @@ In order to display a plugin details, you need to click in its name. A window is
 
 
 ## Login, plugin upload, rates and comments
-It is possible to login the app. To do so, click on "CONNEXION" button in top right of the navigation bar. Write you logins : email= soufiane@aouri.com and password= 000000 then click on "CONNEXION" button. Otherwise, you can also use the app without login. To do so, click on "Continuer en tant que visiteur". This will reduce features you can use in the app !
+It is possible to login the app. To do so, click on "CONNEXION" button in top right of the navigation bar. Write you logins :  :email: email= soufiane@aouri.com and :passport_control:
+ password= 000000 then click on "CONNEXION" button. Otherwise, you can also use the app without login. To do so, click on "Continuer en tant que visiteur". This will reduce features you can use in the app !
 Once you're logged in, you have access to more features. When you come back to the home page, you can add a comment or rate a plugin by going on its details panel like described above.  
 
 In order to upload a new plugin, there is a dedicated button "Publier un plugin" in the navigation bar. You have access to it only if you're logged in ! Clicking on it will redirect you to Upload page. The upload can be made in 2 or 3 steps :
