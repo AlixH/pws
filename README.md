@@ -44,7 +44,9 @@ To run the backend :
 
 ``` npm install ```
 
-``` npm start ```
+``` npm start ```  
+
+it will run on : localhost:4000
 
 To run the front, in a new terminal window :
 
@@ -52,7 +54,10 @@ To run the front, in a new terminal window :
 
 ``` npm install ```
 
-``` npm start ```
+``` npm start ```  
+
+it will run on : localhost:3000
+
 
 ## Run with Docker
 
