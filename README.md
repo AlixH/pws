@@ -3,7 +3,7 @@
 In this document, you will find:  
 - Student names 
 - How to run the projet 
-- How to used implemented features 
+- How to use implemented features 
 
 
 
