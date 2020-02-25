@@ -1,4 +1,12 @@
-# Prog Web - Client & Server side : Development of a collaborative platform for exchanging audio plugins
+# Prog Web - Client & Server side : Development of a collaborative platform for exchanging audio plugins  
+
+In this document, you will find:  
+- Student names 
+- Features of our project
+- How to run the projet 
+
+
+
 
 ## Students  
 - Aourinmouche Chihabeddine                                    
