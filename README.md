@@ -8,11 +8,11 @@ In this document, you will find:
 
 
 
-## Students  
-- Aourinmouche Chihabeddine :innocent:                                
-- Aourinmouche Soufiane  :smiling_imp:
-- Humbert Alix :satisfied:
-- Larabi Walid :sunglasses:
+## Students & who-did-what
+- Aourinmouche Chihabeddine :innocent: Back-end & Font-end                        
+- Aourinmouche Soufiane  :smiling_imp: Back-end & front-end
+- Humbert Alix :satisfied: Mainly front-end and few back-end
+- Larabi Walid :sunglasses: Mainly back-end
 
 ## Run the project
 
